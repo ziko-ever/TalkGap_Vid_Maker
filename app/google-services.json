@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "25940426544",
+    "firebase_url": "https://talkgap-b560b.firebaseio.com",
+    "project_id": "talkgap-b560b",
+    "storage_bucket": "talkgap-b560b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:25940426544:android:268c5346c70332ba7212f5",
+        "android_client_info": {
+          "package_name": "com.talkgap"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "25940426544-uet89sp5de0fbu9rrcrat99uohh59iha.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.talkgap",
+            "certificate_hash": "45afe3c6e9f000540954c2df8035b23389b3881f"
+          }
+        },
+        {
+          "client_id": "25940426544-igpqg8mtbugr1kh9kflec9sdsu7lom38.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBU0SjLwfFyVwYvDidFdTepu4QCnpXiCQM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "25940426544-igpqg8mtbugr1kh9kflec9sdsu7lom38.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

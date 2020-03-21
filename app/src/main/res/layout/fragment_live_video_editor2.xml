@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragment.LiveVideoEditor2Fragment">
+
+    <com.talkgap.ui.surfaceview.AutoFitTextureView
+        android:id="@+id/texture"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="15dp"
+        android:layout_gravity="left">
+
+        <ImageButton
+            android:id="@+id/close_fragment"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/ic_close"
+            android:padding="5dp"
+            android:background="@drawable/circle"
+            android:layout_marginBottom="10dp"
+            />
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:id="@+id/lyt_timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:visibility="gone"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@drawable/circle_red" />
+
+        <TextView
+            android:id="@+id/txt_timer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:text="Ilove u"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/timing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        android:background="@color/colorAccent">
+
+        <ImageButton
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/ic_timer"
+            android:padding="5dp"
+            android:background="@drawable/circle"
+            />
+
+        <ImageButton
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/ic_timer"
+            android:padding="5dp"
+            android:background="@drawable/circle"
+            />
+
+
+        <ImageButton
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/ic_timer"
+            android:padding="5dp"
+            android:background="@drawable/circle"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="15dp"
+        android:layout_gravity="right">
+
+        <ImageButton
+            android:id="@+id/flash"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/ic_flash_off"
+            android:padding="5dp"
+            android:background="@drawable/circle"
+            android:layout_marginBottom="10dp"
+            />
+
+        <ImageButton
+            android:id="@+id/timer"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/ic_timer"
+            android:padding="5dp"
+            android:background="@drawable/circle"
+            android:layout_marginBottom="10dp"
+            />
+
+        <ImageButton
+            android:id="@+id/add_filter"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:padding="5dp"
+            android:background="@drawable/circle"
+            android:src="@drawable/ic_filter"
+            android:layout_marginBottom="10dp"
+            />
+
+        <ImageButton
+            android:id="@+id/rotate"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/ic_autorenew"
+            android:padding="5dp"
+            android:background="@drawable/circle"
+            android:layout_marginBottom="10dp"
+            />
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:id="@+id/central_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center"
+        android:orientation="horizontal"
+        android:layout_marginBottom="30dp">
+
+        <ImageButton
+            android:id="@+id/add_music"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:src="@drawable/ic_music_note"
+            android:padding="5dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/circle"
+            android:layout_gravity="center_vertical"
+            />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true">
+
+            <ProgressBar
+                android:id="@+id/circularProgressbar"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:indeterminate="false"
+                android:max="15"
+                android:progress="5"
+                android:layout_centerInParent="true"
+                android:progressDrawable="@drawable/circular"
+                android:secondaryProgress="15"
+                android:clickable="true"
+                />
+
+<!--            <com.vaibhavlakhera.circularprogressview.CircularProgressView-->
+<!--                android:id="@+id/progressView"-->
+<!--                android:layout_width="164dp"-->
+<!--                android:layout_height="164dp"-->
+<!--                android:layout_centerInParent="true"-->
+<!--                android:clickable="true"-->
+<!--                app:animate="true"-->
+<!--                app:animateDuration="600"-->
+<!--                app:fillColor="@color/colorPrimary"-->
+<!--                app:progressValue="10"-->
+<!--                app:progressColor="#FFF"-->
+<!--                app:progressInterpolator="@android:anim/accelerate_decelerate_interpolator"-->
+<!--                app:progressRoundCap="true"-->
+<!--                app:progressTextColor="#FFF"-->
+<!--                app:progressTextEnabled="true"-->
+<!--                app:progressTextSize="32sp"-->
+<!--                app:progressTextType="progress"-->
+<!--                app:progressWidth="12dp"-->
+<!--                app:startAngle="270"-->
+<!--                app:totalValue="15"-->
+<!--                app:totalColor="@color/colorPrimaryDark"-->
+<!--                app:totalWidth="20dp" />-->
+
+            <com.talkgap.ui.CircularProgressIndicator
+                android:id="@+id/circular_progress"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                app:direction="clockwise"
+                app:dotColor="?colorPrimary"
+                app:dotWidth="20dp"
+                app:drawDot="true"
+                app:enableProgressAnimation="true"
+                app:progressBackgroundColor="@color/white"
+                app:progressBackgroundStrokeWidth="8dp"
+                app:progressCap="round"
+                app:progressColor="?colorPrimary"
+                app:progressStrokeWidth="22dp"
+                app:startAngle="270"
+                app:textColor="#fffc59"
+                app:textSize="14sp"
+                app:fillBackground="false"
+                app:gradientType="linear"
+                app:gradientEndColor="@color/colorAccent" />
+
+            <ImageButton
+                android:id="@+id/start_preview"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:background="@drawable/whitecircle"
+                android:layout_centerInParent="true"/>
+
+            <TextView
+                android:id="@+id/tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="25%"
+                android:layout_centerInParent="true"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="20sp" />
+
+        </RelativeLayout>
+
+<!--        <ImageButton-->
+<!--            android:id="@+id/start_preview"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignParentRight="true"-->
+<!--            android:background="@color/transparentbg"-->
+<!--            android:src="@drawable/ic_record_transparent_outer" />-->
+
+        <ImageButton
+            android:id="@+id/add_effect"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:src="@drawable/ic_effect"
+            android:padding="5dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/circle"
+            android:layout_gravity="center_vertical"
+            />
+
+
+
+    </LinearLayout>
+
+    <include layout="@layout/filter_view"
+        android:id="@+id/lyt_filter"
+        android:layout_gravity="bottom|center"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent" />
+
+    <include layout="@layout/effect_view"
+        android:id="@+id/lyt_effect"
+        android:layout_gravity="bottom|center"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent" />
+
+    <include layout="@layout/preview_view"
+        android:id="@+id/lyt_preview"
+        android:layout_gravity="bottom|center"
+        android:layout_height="100dp"
+        android:layout_width="match_parent" />
+
+<!--    <LinearLayout-->
+<!--        xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="bottom|center"-->
+<!--        android:background="#70000000"-->
+<!--        android:orientation="vertical">-->
+
+<!--        <TextView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Filters"-->
+<!--            android:layout_marginBottom="15dp"-->
+<!--            android:textColor="@color/white"-->
+<!--            android:textAlignment="center"/>-->
+
+<!--        <androidx.recyclerview.widget.RecyclerView-->
+<!--            android:id="@+id/filter_recycler_view"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"/>-->
+
+<!--    </LinearLayout>-->
+
+
+
+</FrameLayout>
