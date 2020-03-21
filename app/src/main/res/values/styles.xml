@@ -77,6 +77,13 @@
         <item name="cornerRadius">0dp</item>
     </style>
 
+    <style name="clickableImageButton">
+        <item name="android:background">@drawable/camera_action_bg</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:contentDescription">@string/app_name</item>
+    </style>
+
 
 
 </resources>

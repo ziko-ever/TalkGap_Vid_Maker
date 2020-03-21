@@ -13,103 +13,95 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-
     <ImageButton
         android:layout_margin="5dp"
         android:id="@+id/back_btn"
-        android:background="@drawable/camera_action_bg"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="@dimen/dp5"
+        android:background="?attr/selectableItemBackgroundBorderless"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_arrow_back"/>
+        android:src="@drawable/ic_clear"/>
 
-    <ImageButton
-        android:layout_margin="5dp"
-        style="@style/flashToggle"
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:id="@+id/flash_toggle_btn"
-        android:background="@drawable/camera_action_bg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_flash_on"/>
-
+        android:orientation="vertical">
+        <ImageButton
+            style="@style/clickableImageButton"
+            android:layout_margin="5dp"
+            android:id="@+id/switch_cam_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_autorenew"/>
+        <ImageButton
+            android:layout_margin="5dp"
+            style="@style/clickableImageButton"
+            android:id="@+id/flash_toggle_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_flash_on"/>
+        <ImageButton
+            style="@style/clickableImageButton"
+            android:layout_margin="5dp"
+            android:id="@+id/timer_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_timer"/>
+        <ImageButton
+            style="@style/clickableImageButton"
+            android:layout_margin="5dp"
+            android:id="@+id/speed_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_speed"/>
+        <ImageButton
+            style="@style/clickableImageButton"
+            android:layout_margin="5dp"
+            android:id="@+id/filter_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_filter"/>
+    </LinearLayout>
 
     <ImageButton
-        android:layout_margin="5dp"
-        android:id="@+id/switch_cam_btn"
-        android:layout_below="@id/filter_btn"
-        android:layout_alignParentEnd="true"
-        android:background="@drawable/camera_action_bg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_autorenew"/>
-
-    <ImageButton
-        android:layout_margin="5dp"
-        android:id="@+id/timer_btn"
-        android:layout_below="@id/flash_toggle_btn"
-        android:layout_alignParentEnd="true"
-        android:background="@drawable/camera_action_bg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_timer"/>
-
-
-    <ImageButton
-        android:layout_margin="5dp"
-        android:id="@+id/filter_btn"
-        android:layout_below="@id/timer_btn"
-        android:layout_alignParentEnd="true"
-        android:background="@drawable/camera_action_bg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_filter"/>
-
-
-    <ImageButton
+        android:layout_marginBottom="30dp"
         android:id="@+id/snap_btn"
         android:background="@drawable/circle_outline"
-        android:clickable="true"
-        android:focusable="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_above="@id/clear_btn"/>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:visibility="gone"
-        android:id="@+id/next_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/snap_btn"
-        android:layout_margin="5dp"
-        app:backgroundTint="@color/colorPrimary"
-        android:src="@drawable/ic_arrow_forward"
-        android:layout_above="@id/clear_btn"
-        app:fabSize="mini" />
-
-    <TextView
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:visibility="invisible"
-        android:clickable="true"
-        android:focusable="true"
-        android:layout_marginBottom="50dp"
-        android:id="@+id/clear_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:drawableStart="@drawable/ic_clear"
         android:layout_alignParentBottom="true"
-        android:gravity="center"
-        android:padding="4dp"
-        android:layout_marginTop="8dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:visibility="gone"
-        android:id="@+id/image_frame_recycler_view"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:id="@+id/effects_btn"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_alignParentBottom="true"
+        android:layout_toEndOf="@id/snap_btn"
+        android:layout_marginStart="8dp"
+        android:gravity="center"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginEnd="4dp"
-        android:layout_above="@id/snap_btn"/>
+        android:orientation="vertical">
+        <ImageButton
+            style="@style/clickableImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_color_lens"/>
+        <TextView
+            android:layout_marginTop="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/effects"
+            android:textColor="@android:color/white"
+            android:fontFamily="@font/open_sans_bold"/>
+
+    </LinearLayout>
 
 </RelativeLayout>

@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.xheghun.vidit.EditActivity
 import com.xheghun.vidit.fragments.GalleryFragment
@@ -34,6 +35,7 @@ class FourSnapFragment : Fragment() {
     private var imageCapture: ImageCapture? = null
     private lateinit var mView: View
     var x = 1
+    private var flashOn: Boolean = false
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -44,136 +46,44 @@ class FourSnapFragment : Fragment() {
         val snapButton: ImageButton = mView.findViewById(R.id.snap_btn)
         val flashToggle: ImageButton = mView.findViewById(R.id.flash_toggle_btn)
         val switchCamButton: ImageButton = mView.findViewById(R.id.switch_cam_btn)
-        val nextBtn = mView.findViewById<FloatingActionButton>(R.id.next_btn)
-        val imageRC = mView.findViewById<RecyclerView>(R.id.image_frame_recycler_view)
-        val clearBtn = mView.findViewById<TextView>(R.id.clear_btn)
+        val close = mView.findViewById<ImageButton>(R.id.back_btn)
+        val timerBtn: ImageButton = mView.findViewById(R.id.timer_btn)
+        val speedBtn : ImageButton = mView.findViewById(R.id.speed_btn)
+        val filterBtn: ImageButton = mView.findViewById(R.id.filter_btn)
 
-        bindCamera()
-
-        val txtPath = "${Environment.getExternalStorageDirectory()}/image_path.txt"
-        val txtFile = File(txtPath)
-
-        if (txtFile.exists()) {
-            txtFile.delete()
-        }
-
-        val images = ArrayList<String>()
         snapButton.setOnClickListener {
-            // Toast.makeText(context!!,"$filesDir",Toast.LENGTH_LONG).show()
-            val filename = "img_${System.currentTimeMillis()}.jpg"
-            x++
-
-            val dest = File(context!!.filesDir, filename)
-            imageCapture?.takePicture(dest,
-                    object : ImageCapture.OnImageSavedListener {
-                        override fun onError(error: ImageCapture.UseCaseError,
-                                             message: String, exc: Throwable?) {
-                            Log.e("Image", error.toString())
-                        }
-
-                        override fun onImageSaved(file: File) {
-                            Log.v("Image", "Successfully saved image")
-                            txtFile.appendText("file '${dest.absolutePath}'\n")
-
-                            val image = file.absolutePath
-                            //Toast.makeText(context!!,file.absolutePath,Toast.LENGTH_LONG).show()
-                            if (images.size > 15) {
-                                Toast.makeText(context!!, "Maximum Of 16 Photos Allowed", Toast.LENGTH_SHORT).show()
-                            } else {
-                                images.add(image)
-                            }
-
-
-                            //Toast.makeText(context!!,"photo path: ${file.path},\n current image: $image",Toast.LENGTH_LONG).show()
-
-                            val layoutManager = LinearLayoutManager(context!!)
-                            layoutManager.orientation = RecyclerView.HORIZONTAL
-                            Animate.fadeInAnimation(imageRC, context!!)
-                            imageRC.layoutManager = layoutManager
-                            imageRC.adapter = ImageFrameAdapter(images, context!!, ImageFrameAdapter.ImageFrameCancelClick { path, _ ->
-                                run {
-                                    images.remove(path)
-                                    imageRC.adapter!!.notifyDataSetChanged()
-                                }
-                            })
-
-                            if (images.size in 4..16) {
-                                Animate.fadeInAnimation(nextBtn, context!!)
-                                nextBtn.setOnClickListener {
-                                    val array = arrayOfNulls<String>(images.size)
-
-
-                                    //convert Images to Video
-                                    val destinationFile = File(context!!.filesDir, "video.mp4")
-                                    if (destinationFile.exists()) {
-                                        destinationFile.delete()
-                                    }
-
-
-                                    Toast.makeText(context!!, txtPath, Toast.LENGTH_LONG).show()
-                                    val cmd = arrayOf("-y", "-f", "concat", "-r", "1/5", "-safe", "0", "-i", txtFile.absolutePath, "-preset", "ultrafast", "-vsync", "vfr", "-vf", "scale=1280:720:force_original_aspect_ratio=decrease,pad=1280:720:(ow-iw)/2:(oh-ih)/2,fps=30,format=yuv420p", destinationFile.absolutePath)
-
-                                    //val cmd = arrayOf("-y", "-r", "1/5","-f", "concat", "-safe", "0", "-i", txtFile.absolutePath , "-c:v", "libx264", "-vf", "fps=25,format=yuv420p", destinationFile.absolutePath)
-
-
-                                    val intent = Intent(context, EditActivity::class.java)
-                                    intent.putExtra("video_path", destinationFile.absolutePath)
-                                    FFmpegSingleton.executeCmD(context, cmd, intent)
-                                }
-
-                            } else {
-                                Animate.fadeOutAnimation(nextBtn, context)
-                            }
-
-                            if (images.size > 0) {
-                                clearBtn.visibility = View.VISIBLE
-                                clearBtn.setOnClickListener {
-                                    images.clear()
-                                    imageRC.adapter!!.notifyDataSetChanged()
-
-                                    Animate.fadeOutAnimation(imageRC, context)
-                                    Animate.fadeOutAnimationIV(clearBtn, context)
-                                    Animate.fadeOutAnimation(nextBtn, context)
-                                }
-                            }
-                            // Toast.makeText(context!!,"Photo Taken",Toast.LENGTH_SHORT).show()
-
-                        }
-                    }
-            )
-        }
-        if (images.size < 3) {
-            Animate.fadeOutAnimation(nextBtn, context)
+            showToast("Snap Clicked")
         }
 
         flashToggle.setOnClickListener {
-            val flashMode = imageCapture?.flashMode
-            if (flashMode == FlashMode.ON) {
-                imageCapture?.flashMode = FlashMode.OFF
-                Toast.makeText(context!!, "Flash Off", Toast.LENGTH_SHORT).show()
+            if (flashOn) {
+                showToast("flash on")
             } else {
-                imageCapture?.flashMode = FlashMode.ON
-                Toast.makeText(context!!, "Flash On", Toast.LENGTH_SHORT).show()
+                showToast("flash off")
             }
+            flashOn = !flashOn
         }
 
-        switchCamButton.setOnClickListener {
-            lensFacing = if (CameraX.LensFacing.FRONT == lensFacing) {
-                CameraX.LensFacing.BACK
-            } else {
-                CameraX.LensFacing.FRONT
-            }
-            bindCamera()
-            Toast.makeText(context!!, "Switching Cam", Toast.LENGTH_SHORT).show()
+        switchCamButton.setOnClickListener { showToast("switching lens") }
 
+        close.setOnClickListener {
+            showToast("Close")
         }
+
+        filterBtn.setOnClickListener { showToast("filter clicked") }
+
+        speedBtn.setOnClickListener { showToast("speed clicked") }
+
+        timerBtn.setOnClickListener { showToast("timer clicked") }
+
+
+        bindCamera()
 
         return mView
     }
 
     private fun bindCamera() {
         CameraX.unbindAll()
-
         // The view that displays the preview
         val textureView: TextureView = mView.findViewById(R.id.texture_view)
 
@@ -188,7 +98,6 @@ class FourSnapFragment : Fragment() {
                 .build()
 
         val preview = Preview(previewConfig)
-
 
         // Handles the output data of the camera
         preview.setOnPreviewOutputUpdateListener { previewOutput ->
@@ -210,35 +119,7 @@ class FourSnapFragment : Fragment() {
         CameraX.bindToLifecycle(activity as LifecycleOwner, imageCapture, preview)
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        deleteFiles()
-    }
-
-    private fun deleteFiles(file: String) {
-        val fileList = File("$file/")
-
-        if (fileList.isDirectory) {
-            val filenames = fileList.listFiles()
-
-            for (mFile in filenames!!) {
-                mFile.delete()
-            }
-        } else {
-            fileList.delete()
-        }
-    }
-
-    private fun deleteFiles() {
-        val dir = File("${context!!.filesDir}/")
-        if (!dir.exists()) {
-            val files = dir.listFiles((GenericExtFilter(".jpg")))
-            for (file in files!!) {
-                if (!file.isDirectory) {
-                    val result = file.delete()
-                    Log.d("TAG", "Deleted: $result")
-                }
-            }
-        }
+    private fun showToast(msg: String) {
+        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
     }
 }

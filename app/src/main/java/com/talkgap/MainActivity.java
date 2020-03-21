@@ -2,28 +2,21 @@ package com.talkgap;
 
 import android.Manifest;
 import android.app.Dialog;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
+
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.WindowManager;
-import android.widget.FrameLayout;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
-
-import com.github.hiteshsondhi88.libffmpeg.FFmpeg;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.xheghun.vidit.adapter.TabAdapter;
 import com.xheghun.vidit.fragments.FourSnapFragment;
 import com.xheghun.vidit.fragments.GalleryFragment;
+import com.xheghun.vidit.fragments.SelfieFragment;
 
 
 public class MainActivity extends AppCompatActivity{
@@ -34,20 +27,11 @@ public class MainActivity extends AppCompatActivity{
     };
 
     private final int PERMISSION_REQUEST_CODE = 3498;
-
-    private BottomNavigationView bottomNavigation;
-    private FrameLayout frameLayout;
     private TabAdapter adapter;
     private TabLayout tabLayout;
     private ViewPager viewPager;
-    private FFmpeg ffmpeg;
 
-    private BroadcastReceiver receiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            Toast.makeText(MainActivity.this, "audio received", Toast.LENGTH_LONG).show();
-        }
-    };
+
 
 
     @Override
@@ -56,10 +40,6 @@ public class MainActivity extends AppCompatActivity{
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
-
-        frameLayout = findViewById(R.id.fragment_container);
-
-        Dialog mDialog = new Dialog(this);
 
         if (hasNoPermission()) {
             requestPermission();
@@ -86,6 +66,7 @@ public class MainActivity extends AppCompatActivity{
         tabLayout = findViewById(R.id.tabLayout);
         adapter = new TabAdapter(getSupportFragmentManager(), 0);
         adapter.addFragment(new GalleryFragment(), getResources().getString(R.string.gallery));
+        adapter.addFragment(new SelfieFragment(),"Selfie");
         adapter.addFragment(new FourSnapFragment(), getResources().getString(R.string.four_snaps));
         viewPager.setAdapter(adapter);
         viewPager.setCurrentItem(1);
@@ -99,12 +80,10 @@ public class MainActivity extends AppCompatActivity{
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        switch (requestCode) {
-            case PERMISSION_REQUEST_CODE:
-                if (grantResults.length != 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    loadFragments();
-                }
-                break;
+        if (requestCode == PERMISSION_REQUEST_CODE) {
+            if (grantResults.length != 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                loadFragments();
+            }
         }
     }
 
