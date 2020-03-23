@@ -1,10 +1,7 @@
 package com.xheghun.vidit.fragments
 
 
-import android.content.Intent
 import android.os.Bundle
-import android.os.Environment
-import android.util.Log
 import android.util.Rational
 import android.util.Size
 import android.view.LayoutInflater
@@ -12,37 +9,38 @@ import android.view.TextureView
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
-import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.button.MaterialButton
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.xheghun.vidit.EditActivity
-import com.xheghun.vidit.fragments.GalleryFragment
+import com.google.android.material.tabs.TabLayout
 import com.talkgap.R
-import com.xheghun.vidit.adapter.ImageFrameAdapter
+import com.xheghun.vidit.XheghunViewPager
+import com.xheghun.vidit.adapter.TabAdapter
 import com.xheghun.vidit.classes.Animate
-import com.xheghun.vidit.classes.FFmpegSingleton
-import com.xheghun.vidit.classes.GenericExtFilter
-import java.io.File
 
 class FourSnapFragment : Fragment() {
+    private val ADD_MUSIC_REQUEST_CODE = 9492
     private var lensFacing = CameraX.LensFacing.BACK
     private var imageCapture: ImageCapture? = null
     private lateinit var mView: View
-    var x = 1
     private var flashOn: Boolean = false
+    private lateinit var filterLayout: ViewGroup
+    private lateinit var filterTab: TabLayout
+    private lateinit var filterViewPager: XheghunViewPager
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for context!! fragment
         mView = inflater.inflate(R.layout.fragment_four_snaps, container, false)
 
-        //delete all files in internal storage
+        //filterLayout = mView.findViewById(R.id.filter_layout)
+        filterTab = mView.findViewById(R.id.filter_tab)
+        filterLayout = mView.findViewById(R.id.filter_layout)
+        filterViewPager = mView.findViewById(R.id.filter_viewpager)
+        val camActionsLayout: ViewGroup = mView.findViewById(R.id.cam_actions_layout)
+        val closeFilterBtn: ImageButton = mView.findViewById(R.id.close_filter_btn)
         val snapButton: ImageButton = mView.findViewById(R.id.snap_btn)
         val flashToggle: ImageButton = mView.findViewById(R.id.flash_toggle_btn)
         val switchCamButton: ImageButton = mView.findViewById(R.id.switch_cam_btn)
@@ -50,6 +48,8 @@ class FourSnapFragment : Fragment() {
         val timerBtn: ImageButton = mView.findViewById(R.id.timer_btn)
         val speedBtn : ImageButton = mView.findViewById(R.id.speed_btn)
         val filterBtn: ImageButton = mView.findViewById(R.id.filter_btn)
+
+        initFilters()
 
         snapButton.setOnClickListener {
             showToast("Snap Clicked")
@@ -70,7 +70,20 @@ class FourSnapFragment : Fragment() {
             showToast("Close")
         }
 
-        filterBtn.setOnClickListener { showToast("filter clicked") }
+        filterBtn.setOnClickListener {
+            if (filterLayout.visibility == View.INVISIBLE || filterLayout.visibility == View.GONE) {
+                Animate.slideUp(filterLayout,context)
+                Animate.slideOutRight(camActionsLayout,context)
+            } else {
+                Animate.slideInRight(filterLayout,context)
+                Animate.slideDown(filterLayout,context)
+            }
+
+
+            showToast("filter clicked")
+        }
+
+        closeFilterBtn.setOnClickListener { Animate.slideDown( filterLayout,context) }
 
         speedBtn.setOnClickListener { showToast("speed clicked") }
 
@@ -121,5 +134,16 @@ class FourSnapFragment : Fragment() {
 
     private fun showToast(msg: String) {
         Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
+    }
+
+
+    private fun initFilters() {
+        val adapter = TabAdapter((context as AppCompatActivity).supportFragmentManager,0)
+        adapter.addFragment(CameraFilterFragment("Portrait"),"Portrait")
+        adapter.addFragment(CameraFilterFragment("landscape"),"Landscape")
+        adapter.addFragment(CameraFilterFragment("food"),"Food")
+
+        filterViewPager.adapter = adapter
+        filterTab.setupWithViewPager(filterViewPager)
     }
 }

@@ -39,4 +39,28 @@ public class Animate {
        view.startAnimation(animation);
    }
 
+    public static void slideOutLeft(View view, Context context) {
+        view.setVisibility(View.GONE);
+        Animation animation = AnimationUtils.loadAnimation(context, R.anim.slide_out_left);
+        view.startAnimation(animation);
+    }
+
+    public static void slideOutRight(View view, Context context) {
+        view.setVisibility(View.GONE);
+        Animation animation = AnimationUtils.loadAnimation(context, R.anim.slide_out_right);
+        view.startAnimation(animation);
+    }
+
+    public static void slideInLeft(View view, Context context) {
+        view.setVisibility(View.VISIBLE);
+        Animation animation = AnimationUtils.loadAnimation(context, R.anim.slide_in_left);
+        view.startAnimation(animation);
+    }
+
+    public static void slideInRight(View view, Context context) {
+        view.setVisibility(View.VISIBLE);
+        Animation animation = AnimationUtils.loadAnimation(context, R.anim.slide_in_right);
+        view.startAnimation(animation);
+    }
+
 }

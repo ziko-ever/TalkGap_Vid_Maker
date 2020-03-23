@@ -1,6 +1,7 @@
 package com.xheghun.vidit.fragments
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Rational
 import android.util.Size
@@ -10,11 +11,13 @@ import android.view.TextureView
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.camera.core.*
 import androidx.lifecycle.LifecycleOwner
 import com.talkgap.R
+import com.xheghun.vidit.MusicSelectActivity
 
 /**
  * A simple [Fragment] subclass.
@@ -24,7 +27,7 @@ class SelfieFragment : Fragment() {
     private var lensFacing = CameraX.LensFacing.BACK
     private var imageCapture: ImageCapture? = null
     private lateinit var mView: View
-    var x = 1
+    private val ADD_MUSIC_REQUEST_CODE = 1029;
     private var flashOn: Boolean = false
 
 
@@ -40,9 +43,14 @@ class SelfieFragment : Fragment() {
         val timerBtn: ImageButton = mView.findViewById(R.id.timer_btn)
         val speedBtn : ImageButton = mView.findViewById(R.id.speed_btn)
         val filterBtn: ImageButton = mView.findViewById(R.id.filter_btn)
+        val addSoundBtn: LinearLayout = mView.findViewById(R.id.add_music_btn)
 
         snapButton.setOnClickListener {
             showToast("Snap Clicked")
+        }
+
+        addSoundBtn.setOnClickListener {
+            startActivityForResult(Intent(context,MusicSelectActivity::class.java),ADD_MUSIC_REQUEST_CODE)
         }
 
         flashToggle.setOnClickListener {
