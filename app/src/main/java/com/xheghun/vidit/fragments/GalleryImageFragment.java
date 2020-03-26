@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.FileUtils;
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,15 +21,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.button.MaterialButton;
-import com.xheghun.vidit.EditActivity;
 import com.talkgap.R;
 import com.xheghun.vidit.adapter.GalleryMediaAdapter;
 import com.xheghun.vidit.adapter.ImageFrameAdapter;
 import com.xheghun.vidit.classes.Animate;
-import com.xheghun.vidit.classes.FFmpegSingleton;
+
 import com.xheghun.vidit.models.GalleryMedia;
 
-import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -160,29 +159,6 @@ import butterknife.ButterKnife;
 
 
                 button.setOnClickListener(v -> {
-
-                    String txtPath = Environment.getExternalStorageDirectory()+"/image_path.txt";
-                    File txtFile = new File(txtPath);
-
-                    for (int i = 0; i < selectedImageList.size();i++) {
-                        String content = "file '"+selectedImageList.get(i)+"' \n";
-                        try {
-                            FileUtils.writeStringToFile(txtFile,content,"utf-8",true);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                    File destinationFile = new File(getContext().getFilesDir() +"/video.mp4");
-                    if (destinationFile.exists()) {
-                        destinationFile.delete();
-                    }
-
-
-                    String[] cmd = {"-y", "-f", "concat", "-r", "1/5", "-safe", "0", "-i", txtFile.getAbsolutePath(), "-preset", "ultrafast", "-vsync", "vfr", "-vf", "scale=1280:720:force_original_aspect_ratio=decrease,pad=1280:720:(ow-iw)/2:(oh-ih)/2,fps=30,format=yuv420p", destinationFile.getAbsolutePath()};
-                    Intent intent = new Intent(getContext(), EditActivity.class);
-                    intent.putExtra("video_path",destinationFile.getAbsolutePath());
-                    FFmpegSingleton.executeCmD(getContext(),cmd,intent);
 
                 });
             } else {

@@ -45,7 +45,6 @@
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name="com.xheghun.vidit.MusicSelectActivity" />
         <activity android:name="com.xheghun.vidit.VideoEditActivity" />
-        <activity android:name="com.xheghun.vidit.EditActivity" />
     </application>
 
 </manifest>

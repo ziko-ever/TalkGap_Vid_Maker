@@ -13,8 +13,20 @@
         android:layout_height="match_parent"/>
 
     <ImageButton
+        android:visibility="gone"
         android:layout_margin="5dp"
         android:id="@+id/back_btn"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="@dimen/dp5"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_arrow_back"/>
+
+    <ImageButton
+        android:layout_margin="5dp"
+        android:id="@+id/close_btn"
         android:clickable="true"
         android:focusable="true"
         android:padding="@dimen/dp5"
@@ -25,6 +37,7 @@
 
 
     <LinearLayout
+        android:id="@+id/cam_actions_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -66,69 +79,102 @@
             android:src="@drawable/ic_filter"/>
     </LinearLayout>
 
-    <ImageButton
-        android:layout_marginBottom="30dp"
-        android:id="@+id/snap_btn"
-        android:background="@drawable/circle_outline"
-        android:layout_alignParentBottom="true"
-        android:clickable="true"
-        android:focusable="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"/>
-
     <LinearLayout
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:id="@+id/add_music_btn"
-        android:clickable="true"
-        android:focusable="true"
-        android:layout_marginEnd="8dp"
-        android:layout_alignParentBottom="true"
-        android:layout_toStartOf="@id/snap_btn"
-        android:gravity="center"
-        android:layout_width="wrap_content"
+        android:visibility="gone"
+        android:layout_marginStart="6dp"
+        android:layout_marginEnd="6dp"
+        android:background="#90000000"
+        android:id="@+id/filter_layout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:orientation="vertical">
-        <ImageButton
-            style="@style/clickableImageButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_music_note"/>
-        <TextView
-            android:layout_marginTop="4dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/add_music"
-            android:textColor="@android:color/white"
-            android:fontFamily="@font/open_sans_bold"/>
-
+            <com.google.android.material.tabs.TabLayout
+                android:background="#90000000"
+                app:tabTextColor="@android:color/white"
+                app:tabIndicatorColor="@android:color/white"
+                android:id="@+id/filter_tab"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        <com.xheghun.vidit.XheghunViewPager
+            android:id="@+id/filter_viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
     </LinearLayout>
 
-    <LinearLayout
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:id="@+id/effects_btn"
-        android:clickable="true"
-        android:focusable="true"
-        android:layout_alignParentBottom="true"
-        android:layout_toEndOf="@id/snap_btn"
-        android:layout_marginStart="8dp"
-        android:gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <ImageButton
-            style="@style/clickableImageButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_color_lens"/>
-        <TextView
-            android:layout_marginTop="4dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/effects"
-            android:textColor="@android:color/white"
-            android:fontFamily="@font/open_sans_bold"/>
 
+    <LinearLayout
+        android:id="@+id/snap_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp5"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+
+        <LinearLayout
+            android:id="@+id/add_music_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageButton
+                style="@style/clickableImageButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_music_note" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/open_sans_bold"
+                android:text="@string/add_music"
+                android:textColor="@android:color/white" />
+
+        </LinearLayout>
+
+        <ImageButton
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="30dp"
+            android:id="@+id/snap_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/circle_outline"
+            android:clickable="true"
+            android:focusable="true" />
+
+        <LinearLayout
+            android:id="@+id/effects_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageButton
+                style="@style/clickableImageButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_color_lens" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/open_sans_bold"
+                android:text="@string/effects"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
     </LinearLayout>
 
 </RelativeLayout>

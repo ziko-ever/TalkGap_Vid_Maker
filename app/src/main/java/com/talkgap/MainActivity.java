@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity{
         adapter = new TabAdapter(getSupportFragmentManager(), 0);
         adapter.addFragment(new GalleryFragment(), getResources().getString(R.string.gallery));
         adapter.addFragment(new SelfieFragment(),"Selfie");
-        adapter.addFragment(new FourSnapFragment(), getResources().getString(R.string.four_snaps));
+        //adapter.addFragment(new FourSnapFragment(), getResources().getString(R.string.four_snaps));
         viewPager.setAdapter(adapter);
         viewPager.setCurrentItem(1);
         tabLayout.setupWithViewPager(viewPager);

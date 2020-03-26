@@ -27,19 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="220dp"/>
 
-    <com.appyvet.materialrangebar.RangeBar
-        android:id="@+id/range_bar"
-        android:layout_below="@id/videoView"
-        android:layout_width="match_parent"
-        android:layout_marginStart="18dp"
-        android:layout_marginEnd="18dp"
-        app:mrb_tickInterval="1"
-        app:mrb_tickStart="1"
-        app:mrb_tickEnd="40"
-        app:mrb_barWeight="4dp"
-        app:mrb_leftSelectorColor="@color/colorPrimary"
-        app:mrb_rightSelectorColor="@color/colorPrimaryDark"
-        android:layout_height="wrap_content"/>
+
 
     <ProgressBar
         android:id="@+id/progress"

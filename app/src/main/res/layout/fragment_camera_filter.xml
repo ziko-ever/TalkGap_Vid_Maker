@@ -2,7 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#ffffff"
+    android:background="#90000000"
+    android:padding="10dp"
     tools:context="com.xheghun.vidit.fragments.CameraFilterFragment">
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/cam_filter_recyclerview"

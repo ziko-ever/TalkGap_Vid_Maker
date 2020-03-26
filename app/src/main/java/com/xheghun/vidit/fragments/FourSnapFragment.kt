@@ -21,7 +21,6 @@ import com.xheghun.vidit.adapter.TabAdapter
 import com.xheghun.vidit.classes.Animate
 
 class FourSnapFragment : Fragment() {
-    private val ADD_MUSIC_REQUEST_CODE = 9492
     private var lensFacing = CameraX.LensFacing.BACK
     private var imageCapture: ImageCapture? = null
     private lateinit var mView: View
@@ -44,7 +43,7 @@ class FourSnapFragment : Fragment() {
         val snapButton: ImageButton = mView.findViewById(R.id.snap_btn)
         val flashToggle: ImageButton = mView.findViewById(R.id.flash_toggle_btn)
         val switchCamButton: ImageButton = mView.findViewById(R.id.switch_cam_btn)
-        val close = mView.findViewById<ImageButton>(R.id.back_btn)
+        val close = mView.findViewById<ImageButton>(R.id.close_btn)
         val timerBtn: ImageButton = mView.findViewById(R.id.timer_btn)
         val speedBtn : ImageButton = mView.findViewById(R.id.speed_btn)
         val filterBtn: ImageButton = mView.findViewById(R.id.filter_btn)
@@ -57,9 +56,9 @@ class FourSnapFragment : Fragment() {
 
         flashToggle.setOnClickListener {
             if (flashOn) {
-                showToast("flash on")
-            } else {
                 showToast("flash off")
+            } else {
+                showToast("flash on")
             }
             flashOn = !flashOn
         }
@@ -73,9 +72,9 @@ class FourSnapFragment : Fragment() {
         filterBtn.setOnClickListener {
             if (filterLayout.visibility == View.INVISIBLE || filterLayout.visibility == View.GONE) {
                 Animate.slideUp(filterLayout,context)
+                Animate.slideOutLeft(close,context)
                 Animate.slideOutRight(camActionsLayout,context)
             } else {
-                Animate.slideInRight(filterLayout,context)
                 Animate.slideDown(filterLayout,context)
             }
 
@@ -83,7 +82,11 @@ class FourSnapFragment : Fragment() {
             showToast("filter clicked")
         }
 
-        closeFilterBtn.setOnClickListener { Animate.slideDown( filterLayout,context) }
+        closeFilterBtn.setOnClickListener {
+            Animate.slideDown( filterLayout,context)
+            Animate.slideInLeft(close,context)
+            Animate.slideInRight(camActionsLayout,context)
+        }
 
         speedBtn.setOnClickListener { showToast("speed clicked") }
 
@@ -136,9 +139,8 @@ class FourSnapFragment : Fragment() {
         Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
     }
 
-
     private fun initFilters() {
-        val adapter = TabAdapter((context as AppCompatActivity).supportFragmentManager,0)
+        val adapter = TabAdapter((context as AppCompatActivity).supportFragmentManager,1)
         adapter.addFragment(CameraFilterFragment("Portrait"),"Portrait")
         adapter.addFragment(CameraFilterFragment("landscape"),"Landscape")
         adapter.addFragment(CameraFilterFragment("food"),"Food")
