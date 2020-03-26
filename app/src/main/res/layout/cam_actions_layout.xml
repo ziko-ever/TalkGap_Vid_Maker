@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cam_actions_layout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentEnd="true"
+    android:orientation="vertical"
+    tools:showIn="@layout/fragment_selfie">
+
+    <ImageButton
+        style="@style/clickableImageButton"
+        android:layout_margin="5dp"
+        android:id="@+id/switch_cam_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_autorenew" />
+
+    <ImageButton
+        android:layout_margin="5dp"
+        style="@style/clickableImageButton"
+        android:id="@+id/flash_toggle_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_flash_on" />
+
+    <ImageButton
+        style="@style/clickableImageButton"
+        android:layout_margin="5dp"
+        android:id="@+id/timer_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_timer" />
+
+    <ImageButton
+        style="@style/clickableImageButton"
+        android:layout_margin="5dp"
+        android:id="@+id/speed_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_speed" />
+
+    <ImageButton
+        style="@style/clickableImageButton"
+        android:layout_margin="5dp"
+        android:id="@+id/filter_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_filter" />
+</LinearLayout>
