@@ -35,25 +35,41 @@ class SelfieFragment : Fragment() {
     private lateinit var filterLayout: ViewGroup
     private lateinit var filterTab: TabLayout
     private lateinit var filterViewPager: XheghunViewPager
+    private lateinit var backBtn: View
+    private lateinit var snapLayout: ViewGroup
+    private lateinit var addMusicBtn: View
+    private lateinit var camActionsLayout: ViewGroup
+    private lateinit var snapButton: ImageButton
+    private lateinit var flashToggle: ImageButton
+    private lateinit var switchCamButton: ImageButton
+    private lateinit var close:View
+    private lateinit var timerBtn:View
+    private lateinit var speedBtn : ImageButton
+    private lateinit var filterBtn: ImageButton
+    private lateinit var textureView: TextureView
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for context!! fragment
+        // The view that displays the preview
         mView = inflater.inflate(R.layout.fragment_selfie, container, false)
+
+
+        textureView = mView.findViewById(R.id.texture_view_selfie)
         filterTab = mView.findViewById(R.id.filter_tab)
         filterLayout = mView.findViewById(R.id.filter_layout)
         filterViewPager = mView.findViewById(R.id.filter_viewpager)
-        val backBtn = mView.findViewById<ImageButton>(R.id.back_btn)
-        val snapLayout = mView.findViewById<ViewGroup>(R.id.snap_layout)
-        val addMusicBtn: ViewGroup = mView.findViewById(R.id.add_music_btn)
-        val camActionsLayout: ViewGroup = mView.findViewById(R.id.cam_actions_layout)
-        val snapButton: ImageButton = mView.findViewById(R.id.snap_btn)
-        val flashToggle: ImageButton = mView.findViewById(R.id.flash_toggle_btn)
-        val switchCamButton: ImageButton = mView.findViewById(R.id.switch_cam_btn)
-        val close = mView.findViewById<ImageButton>(R.id.close_btn)
-        val timerBtn: ImageButton = mView.findViewById(R.id.timer_btn)
-        val speedBtn : ImageButton = mView.findViewById(R.id.speed_btn)
-        val filterBtn: ImageButton = mView.findViewById(R.id.filter_btn)
+        backBtn = mView.findViewById<ImageButton>(R.id.back_btn)
+        snapLayout = mView.findViewById<ViewGroup>(R.id.snap_layout)
+        addMusicBtn = mView.findViewById(R.id.add_music_btn)
+        camActionsLayout = mView.findViewById(R.id.cam_actions_layout)
+        snapButton = mView.findViewById(R.id.snap_btn)
+        flashToggle = mView.findViewById(R.id.flash_toggle_btn)
+        switchCamButton = mView.findViewById(R.id.switch_cam_btn)
+        close = mView.findViewById<ImageButton>(R.id.close_btn)
+        timerBtn = mView.findViewById(R.id.timer_btn)
+        speedBtn = mView.findViewById(R.id.speed_btn)
+        filterBtn = mView.findViewById(R.id.filter_btn)
 
         initFilters()
 
@@ -90,6 +106,16 @@ class SelfieFragment : Fragment() {
             }
         }
 
+        textureView.setOnClickListener {
+            Animate.slideInLeft(close,context)
+            Animate.slideInRight(camActionsLayout,context)
+            Animate.slideUp(snapLayout,context)
+            backBtn.visibility = View.GONE
+            if (filterLayout.visibility == View.VISIBLE) {
+                Animate.slideDown(filterLayout,context)
+            }
+        }
+
         filterBtn.setOnClickListener {
             if (filterLayout.visibility == View.INVISIBLE || filterLayout.visibility == View.GONE) {
                 backBtn.visibility = View.VISIBLE
@@ -117,8 +143,6 @@ class SelfieFragment : Fragment() {
 
     private fun bindCamera() {
         CameraX.unbindAll()
-        // The view that displays the preview
-        val textureView: TextureView = mView.findViewById(R.id.texture_view_selfie)
 
         val aspectRatio = Rational(textureView.width, textureView.height)
         val screen = Size(textureView.width, textureView.height)
@@ -166,4 +190,5 @@ class SelfieFragment : Fragment() {
         filterViewPager.adapter = adapter
         filterTab.setupWithViewPager(filterViewPager)
     }
+
 }
