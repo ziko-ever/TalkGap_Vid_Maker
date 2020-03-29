@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:visibility="gone"
+    android:background="#90000000"
+    android:id="@+id/effects_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:orientation="vertical"
+    tools:showIn="@layout/fragment_selfie">
+
+    <com.google.android.material.tabs.TabLayout
+        app:tabTextAppearance="@style/tabTextAppearance"
+        android:background="#90000000"
+        app:tabTextColor="@android:color/white"
+        app:tabIndicatorColor="@android:color/white"
+        android:id="@+id/effects_tab"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <com.xheghun.vidit.XheghunViewPager
+        android:id="@+id/effects_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>
+
+

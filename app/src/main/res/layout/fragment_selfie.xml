@@ -39,6 +39,8 @@
 
     <include layout="@layout/filter_layout" />
 
+    <include layout="@layout/effects_layout"/>
+
     <include layout="@layout/snap_layout" />
 
 </RelativeLayout>

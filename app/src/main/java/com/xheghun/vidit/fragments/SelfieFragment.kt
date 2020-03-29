@@ -14,6 +14,7 @@ import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.*
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.LifecycleOwner
 import com.google.android.material.tabs.TabLayout
 import com.talkgap.R
@@ -35,6 +36,12 @@ class SelfieFragment : Fragment() {
     private lateinit var filterLayout: ViewGroup
     private lateinit var filterTab: TabLayout
     private lateinit var filterViewPager: XheghunViewPager
+
+
+    private lateinit var effectsLayout: ViewGroup
+    private lateinit var effectsTab: TabLayout
+    private lateinit var effectsViewPager: XheghunViewPager
+
     private lateinit var backBtn: View
     private lateinit var snapLayout: ViewGroup
     private lateinit var addMusicBtn: View
@@ -47,6 +54,8 @@ class SelfieFragment : Fragment() {
     private lateinit var speedBtn : ImageButton
     private lateinit var filterBtn: ImageButton
     private lateinit var textureView: TextureView
+    private lateinit var effectsBtn: View
+    private lateinit var mActivity: FragmentManager
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -54,11 +63,19 @@ class SelfieFragment : Fragment() {
         // The view that displays the preview
         mView = inflater.inflate(R.layout.fragment_selfie, container, false)
 
+        mActivity =  (super.getActivity()!!.supportFragmentManager)
 
         textureView = mView.findViewById(R.id.texture_view_selfie)
+
         filterTab = mView.findViewById(R.id.filter_tab)
         filterLayout = mView.findViewById(R.id.filter_layout)
         filterViewPager = mView.findViewById(R.id.filter_viewpager)
+
+        effectsTab = mView.findViewById(R.id.effects_tab)
+        effectsLayout = mView.findViewById(R.id.effects_layout)
+        effectsViewPager = mView.findViewById(R.id.effects_viewpager)
+
+        effectsBtn = mView.findViewById(R.id.effects_btn)
         backBtn = mView.findViewById<ImageButton>(R.id.back_btn)
         snapLayout = mView.findViewById<ViewGroup>(R.id.snap_layout)
         addMusicBtn = mView.findViewById(R.id.add_music_btn)
@@ -72,6 +89,7 @@ class SelfieFragment : Fragment() {
         filterBtn = mView.findViewById(R.id.filter_btn)
 
         initFilters()
+        initEffects()
 
         snapButton.setOnClickListener {
             showToast("Snap Clicked")
@@ -97,23 +115,11 @@ class SelfieFragment : Fragment() {
         }
 
         backBtn.setOnClickListener {
-            Animate.slideInLeft(close,context)
-            Animate.slideInRight(camActionsLayout,context)
-            Animate.slideUp(snapLayout,context)
-            backBtn.visibility = View.GONE
-            if (filterLayout.visibility == View.VISIBLE) {
-                Animate.slideDown(filterLayout,context)
-            }
+          showCamActions()
         }
 
         textureView.setOnClickListener {
-            Animate.slideInLeft(close,context)
-            Animate.slideInRight(camActionsLayout,context)
-            Animate.slideUp(snapLayout,context)
-            backBtn.visibility = View.GONE
-            if (filterLayout.visibility == View.VISIBLE) {
-                Animate.slideDown(filterLayout,context)
-            }
+          showCamActions()
         }
 
         filterBtn.setOnClickListener {
@@ -126,9 +132,20 @@ class SelfieFragment : Fragment() {
             } else {
                 Animate.slideDown(filterLayout,context)
             }
-
-
             showToast("filter clicked")
+        }
+
+        effectsBtn.setOnClickListener {
+            if (effectsLayout.visibility == View.INVISIBLE || effectsLayout.visibility == View.GONE) {
+                backBtn.visibility = View.VISIBLE
+                Animate.slideUp(effectsLayout,context)
+                Animate.slideOutLeft(close,context)
+                Animate.slideOutRight(camActionsLayout,context)
+                Animate.slideDown(snapLayout,context)
+            } else {
+                Animate.slideDown(effectsLayout,context)
+            }
+            showToast("effects clicked")
         }
 
         speedBtn.setOnClickListener { showToast("speed clicked") }
@@ -180,15 +197,39 @@ class SelfieFragment : Fragment() {
         Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
     }
 
-
     private fun initFilters() {
-        val adapter = TabAdapter((context as AppCompatActivity).supportFragmentManager,0)
+        val adapter = TabAdapter(mActivity,0)
         adapter.addFragment(CameraFilterFragment("PRT "),"Portrait")
         adapter.addFragment(CameraFilterFragment("LND "),"Landscape")
         adapter.addFragment(CameraFilterFragment("STL "),"Style-Leo")
 
+
         filterViewPager.adapter = adapter
         filterTab.setupWithViewPager(filterViewPager)
+    }
+
+   private fun initEffects() {
+        val adapter = TabAdapter(mActivity,0)
+        adapter.addFragment(CamEffectsFragment(8),"Free")
+        adapter.addFragment(CamEffectsFragment(6),"My Effects")
+        adapter.addFragment(CamEffectsFragment(12),"Favourite")
+
+        effectsViewPager.adapter = adapter
+        effectsTab.setupWithViewPager(effectsViewPager)
+    }
+
+    private fun showCamActions() {
+        if (camActionsLayout.visibility == View.GONE) {
+            Animate.slideInLeft(close, context)
+            Animate.slideInRight(camActionsLayout, context)
+            Animate.slideUp(snapLayout, context)
+        }
+        backBtn.visibility = View.GONE
+        if (filterLayout.visibility == View.VISIBLE) {
+            Animate.slideDown(filterLayout,context)
+        } else if (effectsLayout.visibility == View.VISIBLE) {
+            Animate.slideDown(effectsLayout,context)
+        }
     }
 
 }
