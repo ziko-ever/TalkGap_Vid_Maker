@@ -33,16 +33,13 @@ public class MusicSelectActivity extends AppCompatActivity {
         player = new MediaPlayer();
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new MusicListAdapter(this, getAudioFiles(), new MusicItemClickListener() {
-            @Override
-            public void onItemClick(MusicData data) {
-                if (player.isPlaying()) {
-                    player.stop();
-                    player.release();
-                    playAudio(data.getPath());
-                } else {
-                    playAudio(data.getPath());
-                }
+        recyclerView.setAdapter(new MusicListAdapter(this, getAudioFiles(), data -> {
+            if (player.isPlaying()) {
+                player.stop();
+                player.release();
+                playAudio(data.getPath());
+            } else {
+                playAudio(data.getPath());
             }
         }));
     }
