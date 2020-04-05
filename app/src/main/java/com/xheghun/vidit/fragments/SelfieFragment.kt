@@ -1,28 +1,31 @@
 package com.xheghun.vidit.fragments
 
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.util.Rational
 import android.util.Size
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.TextureView
-import android.view.View
-import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.ProgressBar
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.*
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.LifecycleOwner
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayout
 import com.talkgap.R
 import com.xheghun.vidit.AddMusicActivity
-import com.xheghun.vidit.MusicSelectActivity
+import com.xheghun.vidit.SelfieVideoEditActivity
+import com.xheghun.vidit.VideoEditActivity
 import com.xheghun.vidit.XheghunViewPager
 import com.xheghun.vidit.adapter.TabAdapter
 import com.xheghun.vidit.classes.Animate
+import kotlinx.android.synthetic.main.snap_layout.view.*
+import java.util.concurrent.atomic.AtomicBoolean
 
 /**
  * A simple [Fragment] subclass.
@@ -37,12 +40,18 @@ class SelfieFragment : Fragment() {
     private lateinit var filterLayout: ViewGroup
     private lateinit var filterTab: TabLayout
     private lateinit var filterViewPager: XheghunViewPager
+    private var handler = Handler()
+    private var progressStatus: Int = 0
+    private var progress: Int = 0
+    private var thread: Thread? = null
+    private var running = AtomicBoolean()
 
 
     private lateinit var effectsLayout: ViewGroup
     private lateinit var effectsTab: TabLayout
     private lateinit var effectsViewPager: XheghunViewPager
 
+    private lateinit var selfieNextBtn: FloatingActionButton
     private lateinit var backBtn: View
     private lateinit var snapLayout: ViewGroup
     private lateinit var addMusicBtn: View
@@ -57,8 +66,9 @@ class SelfieFragment : Fragment() {
     private lateinit var textureView: TextureView
     private lateinit var effectsBtn: View
     private lateinit var mActivity: FragmentManager
+    private lateinit var videoProgressBar: ProgressBar
 
-
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for context!! fragment
         // The view that displays the preview
@@ -66,11 +76,13 @@ class SelfieFragment : Fragment() {
 
         mActivity =  (super.getActivity()!!.supportFragmentManager)
 
+
         textureView = mView.findViewById(R.id.texture_view_selfie)
 
         filterTab = mView.findViewById(R.id.filter_tab)
         filterLayout = mView.findViewById(R.id.filter_layout)
         filterViewPager = mView.findViewById(R.id.filter_viewpager)
+        videoProgressBar = mView.findViewById(R.id.video_progress_bar)
 
         effectsTab = mView.findViewById(R.id.effects_tab)
         effectsLayout = mView.findViewById(R.id.effects_layout)
@@ -88,12 +100,36 @@ class SelfieFragment : Fragment() {
         timerBtn = mView.findViewById(R.id.timer_btn)
         speedBtn = mView.findViewById(R.id.speed_btn)
         filterBtn = mView.findViewById(R.id.filter_btn)
+        selfieNextBtn = mView.findViewById(R.id.selfie_next_btn)
 
         initFilters()
         initEffects()
 
-        snapButton.setOnClickListener {
-            showToast("Snap Clicked")
+
+        snapButton.setOnTouchListener { v, event ->
+            if (event.action == MotionEvent.ACTION_DOWN) {
+                Thread.sleep(1000)
+
+                mView.effects_btn_layout.visibility = View.GONE
+                mView.add_music_btn_layout.visibility = View.GONE
+                Animate.slideOutRight(camActionsLayout,context)
+                Animate.slideInDown(videoProgressBar,context)
+                startProgress()
+                Toast.makeText(context,"yo",Toast.LENGTH_SHORT).show()
+            } else if (event.action == MotionEvent.ACTION_UP) {
+                stopThread()
+                Animate.slideOutUp(videoProgressBar,context)
+                if (selfieNextBtn.visibility != View.VISIBLE) {
+                    mView.add_music_btn_layout.visibility = View.VISIBLE
+                    mView.effects_btn_layout.visibility = View.VISIBLE
+
+                } else {
+                    selfieNextBtn.hide()
+                }
+                Toast.makeText(context,"ha",Toast.LENGTH_SHORT).show()
+
+            }
+            false
         }
 
         flashToggle.setOnClickListener {
@@ -111,6 +147,10 @@ class SelfieFragment : Fragment() {
             showToast("Close")
         }
 
+        selfieNextBtn.setOnClickListener {
+            startActivity(Intent(context,SelfieVideoEditActivity::class.java))
+        }
+
         addMusicBtn.setOnClickListener {
             startActivityForResult(Intent(context,AddMusicActivity::class.java),ADD_MUSIC_REQUEST_CODE)
         }
@@ -126,12 +166,12 @@ class SelfieFragment : Fragment() {
         filterBtn.setOnClickListener {
             if (filterLayout.visibility == View.INVISIBLE || filterLayout.visibility == View.GONE) {
                 backBtn.visibility = View.VISIBLE
-                Animate.slideUp(filterLayout,context)
+                Animate.slideInUp(filterLayout,context)
                 Animate.slideOutLeft(close,context)
                 Animate.slideOutRight(camActionsLayout,context)
-                Animate.slideDown(snapLayout,context)
+                Animate.slideOutDown(snapLayout,context)
             } else {
-                Animate.slideDown(filterLayout,context)
+                Animate.slideOutDown(filterLayout,context)
             }
             showToast("filter clicked")
         }
@@ -139,12 +179,12 @@ class SelfieFragment : Fragment() {
         effectsBtn.setOnClickListener {
             if (effectsLayout.visibility == View.INVISIBLE || effectsLayout.visibility == View.GONE) {
                 backBtn.visibility = View.VISIBLE
-                Animate.slideUp(effectsLayout,context)
+                Animate.slideInUp(effectsLayout,context)
                 Animate.slideOutLeft(close,context)
                 Animate.slideOutRight(camActionsLayout,context)
-                Animate.slideDown(snapLayout,context)
+                Animate.slideOutDown(snapLayout,context)
             } else {
-                Animate.slideDown(effectsLayout,context)
+                Animate.slideOutDown(effectsLayout,context)
             }
             showToast("effects clicked")
         }
@@ -223,14 +263,48 @@ class SelfieFragment : Fragment() {
         if (camActionsLayout.visibility == View.GONE) {
             Animate.slideInLeft(close, context)
             Animate.slideInRight(camActionsLayout, context)
-            Animate.slideUp(snapLayout, context)
+            Animate.slideInUp(snapLayout, context)
         }
         backBtn.visibility = View.GONE
         if (filterLayout.visibility == View.VISIBLE) {
-            Animate.slideDown(filterLayout,context)
+            Animate.slideOutDown(filterLayout,context)
         } else if (effectsLayout.visibility == View.VISIBLE) {
-            Animate.slideDown(effectsLayout,context)
+            Animate.slideOutDown(effectsLayout,context)
         }
     }
 
+    private fun stopThread() {
+        running.set(false)
+    }
+
+
+    private fun startProgress() {
+        thread = null
+        progressStatus = 0
+        thread = Thread( Runnable {
+            running.set(true)
+            if (running.get()) {
+                while (progressStatus < 15) {
+                    progressStatus += 1
+                    handler.post {
+                        videoProgressBar.progress = progressStatus
+                        if (progressStatus > 5) {
+                            selfieNextBtn.show()
+                        } else {
+                            selfieNextBtn.hide()
+                        }
+                    }
+
+                    try {
+                        Thread.sleep(1000)
+                    } catch (e: InterruptedException) {
+                        e.printStackTrace()
+                    }
+                }
+            }
+        })
+
+        thread!!.start()
+
+    }
 }

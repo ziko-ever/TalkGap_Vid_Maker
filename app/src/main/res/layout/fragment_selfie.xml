@@ -7,11 +7,22 @@
     android:background="#000000">
 
 
+
     <TextureView
         android:id="@+id/texture_view_selfie"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
+    <ProgressBar
+        android:id="@+id/video_progress_bar"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginTop="10dp"
+        android:max="15"
+        android:visibility="gone"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="6dp"/>
     <ImageButton
         android:visibility="gone"
         android:layout_margin="5dp"
@@ -26,6 +37,7 @@
 
     <ImageButton
         android:layout_margin="5dp"
+        android:layout_below="@id/video_progress_bar"
         android:id="@+id/close_btn"
         android:clickable="true"
         android:focusable="true"

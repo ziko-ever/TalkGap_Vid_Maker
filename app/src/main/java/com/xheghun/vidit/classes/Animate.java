@@ -27,13 +27,25 @@ public class Animate {
         view.startAnimation(animation);
    }
 
-   public static void slideDown(View view, Context context) {
+   public static void slideOutDown(View view, Context context) {
         Animation animation = AnimationUtils.loadAnimation(context,R.anim.slide_down);
         view.startAnimation(animation);
         view.setVisibility(View.GONE);
    }
 
-   public static void slideUp(View view, Context context) {
+    public static void slideInDown(View view, Context context) {
+        Animation animation = AnimationUtils.loadAnimation(context,R.anim.slide_down);
+        view.startAnimation(animation);
+        view.setVisibility(View.VISIBLE);
+    }
+
+    public static void slideOutUp(View view, Context context) {
+        view.setVisibility(View.GONE);
+        Animation animation = AnimationUtils.loadAnimation(context, R.anim.slide_up);
+        view.startAnimation(animation);
+    }
+
+   public static void slideInUp(View view, Context context) {
         view.setVisibility(View.VISIBLE);
        Animation animation = AnimationUtils.loadAnimation(context, R.anim.slide_up);
        view.startAnimation(animation);

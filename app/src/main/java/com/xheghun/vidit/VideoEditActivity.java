@@ -47,8 +47,6 @@ public class VideoEditActivity extends AppCompatActivity {
         setContentView(R.layout.activity_video_edit);
         ButterKnife.bind(this);
 
-        videoPath = intent.getStringExtra("video_path");
-
         toolbar.setNavigationOnClickListener(v -> {
             onBackPressed();
             finish();

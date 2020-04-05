@@ -71,11 +71,11 @@ class FourSnapFragment : Fragment() {
 
         filterBtn.setOnClickListener {
             if (filterLayout.visibility == View.INVISIBLE || filterLayout.visibility == View.GONE) {
-                Animate.slideUp(filterLayout,context)
+                Animate.slideInUp(filterLayout,context)
                 Animate.slideOutLeft(close,context)
                 Animate.slideOutRight(camActionsLayout,context)
             } else {
-                Animate.slideDown(filterLayout,context)
+                Animate.slideOutDown(filterLayout,context)
             }
 
 
@@ -83,7 +83,7 @@ class FourSnapFragment : Fragment() {
         }
 
         closeFilterBtn.setOnClickListener {
-            Animate.slideDown( filterLayout,context)
+            Animate.slideOutDown( filterLayout,context)
             Animate.slideInLeft(close,context)
             Animate.slideInRight(camActionsLayout,context)
         }

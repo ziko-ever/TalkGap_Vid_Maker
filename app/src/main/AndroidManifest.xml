@@ -22,7 +22,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name="com.xheghun.vidit.UploadVideoActivity"></activity>
+        <activity android:name="com.xheghun.vidit.SelfieVideoEditActivity"></activity>
+        <activity android:name="com.xheghun.vidit.UploadVideoActivity" />
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
@@ -40,11 +41,11 @@
         <activity
             android:name=".VideoEditorActivity"
             android:label="@string/title_activity_video_editor"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ApplyEffectActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name="com.xheghun.vidit.MusicSelectActivity" />
         <activity android:name="com.xheghun.vidit.VideoEditActivity" />
     </application>

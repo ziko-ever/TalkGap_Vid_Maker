@@ -42,6 +42,8 @@ public class AddMusicActivity extends AppCompatActivity implements AudioClickLis
 
         back_btn.setOnClickListener(v -> finish());
 
+
+
         //Toast.makeText(this,String.valueOf(audioList.size()), Toast.LENGTH_LONG).show();
 
         // use this setting to improve performance if you know that changes
