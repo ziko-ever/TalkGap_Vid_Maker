@@ -1,5 +1,8 @@
 package com.xheghun.vidit.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 public class MusicData {
     private String musicName;
     private String albumCover;

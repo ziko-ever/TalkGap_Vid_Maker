@@ -18,6 +18,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.LifecycleOwner
 import com.google.android.material.tabs.TabLayout
 import com.talkgap.R
+import com.xheghun.vidit.AddMusicActivity
 import com.xheghun.vidit.MusicSelectActivity
 import com.xheghun.vidit.XheghunViewPager
 import com.xheghun.vidit.adapter.TabAdapter
@@ -77,7 +78,7 @@ class SelfieFragment : Fragment() {
 
         effectsBtn = mView.findViewById(R.id.effects_btn)
         backBtn = mView.findViewById<ImageButton>(R.id.back_btn)
-        snapLayout = mView.findViewById<ViewGroup>(R.id.snap_layout)
+        snapLayout = mView.findViewById(R.id.snap_layout)
         addMusicBtn = mView.findViewById(R.id.add_music_btn)
         camActionsLayout = mView.findViewById(R.id.cam_actions_layout)
         snapButton = mView.findViewById(R.id.snap_btn)
@@ -111,7 +112,7 @@ class SelfieFragment : Fragment() {
         }
 
         addMusicBtn.setOnClickListener {
-            startActivityForResult(Intent(context,MusicSelectActivity::class.java),ADD_MUSIC_REQUEST_CODE)
+            startActivityForResult(Intent(context,AddMusicActivity::class.java),ADD_MUSIC_REQUEST_CODE)
         }
 
         backBtn.setOnClickListener {

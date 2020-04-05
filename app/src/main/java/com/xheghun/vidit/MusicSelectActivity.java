@@ -10,8 +10,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.xheghun.vidit._interface.MusicItemClickListener;
 import com.xheghun.vidit.adapter.MusicListAdapter;
 import com.xheghun.vidit.models.MusicData;
 
@@ -29,11 +27,12 @@ public class MusicSelectActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_music_select);
 
-        RecyclerView recyclerView = findViewById(R.id.music_list);        recyclerView.setHasFixedSize(true);
+        RecyclerView recyclerView = findViewById(R.id.music_list);
+        recyclerView.setHasFixedSize(true);
         player = new MediaPlayer();
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new MusicListAdapter(this, getAudioFiles(), data -> {
+       recyclerView.setAdapter(new MusicListAdapter(this, getAudioFiles(), data -> {
             if (player.isPlaying()) {
                 player.stop();
                 player.release();
@@ -53,24 +52,26 @@ public class MusicSelectActivity extends AppCompatActivity {
 
         if (cursor != null && cursor.getCount() > 0 ) {
             while (cursor.moveToNext()) {
-                MusicData musicData = new MusicData();
                 String path = cursor.getString(0);
                 String name = cursor.getString(1);
                 String duration = cursor.getString(2);
                 String artist = cursor.getString(3);
-
+                MusicData musicData = new MusicData();
                 musicData.setMusicName(name);
                 musicData.setPath(path);
                 musicData.setDuration(duration);
                 musicData.setArtist(artist);
-
                 musicDataList.add(musicData);
             }
+
+
+
             cursor.close();
         } else {
             Toast.makeText(this,"No Audio On this device",Toast.LENGTH_SHORT).show();
             finish();
         }
+
         return musicDataList;
     }
     private void playAudio(String path) {

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/parent_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent"
+    android:padding="5dp">
+
+    <RelativeLayout
+        android:id="@+id/thumbnail_layout"
+        android:layout_width="60dp"
+        android:layout_height="70dp"
+        android:layout_marginRight="10dp">
+
+        <ImageView
+            android:id="@+id/thumbnail"
+            android:layout_width="60dp"
+            android:layout_height="70dp"
+            android:src="@drawable/circle" />
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:id="@+id/details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="10dp"
+        android:layout_toEndOf="@id/thumbnail_layout"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/displayname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/artist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/duration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/sub_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/details"
+        android:orientation="horizontal">
+
+        <rm.com.audiowave.AudioWaveView
+            android:id="@+id/audio_wave"
+            android:layout_width="0dp"
+            android:layout_height="32dp"
+            android:layout_margin="16dp"
+            android:layout_weight="1"
+            app:animateExpansion="false"
+            app:chunkHeight="16dp"
+            app:chunkRadius="1dp"
+            app:chunkSpacing="1dp"
+            app:chunkWidth="3dp"
+            app:minChunkHeight="2dp"
+            app:touchable="true"
+            app:waveColor="@color/colorPrimaryDark" />
+
+
+        <com.google.android.material.button.MaterialButton
+            app:cornerRadius="25dp"
+            app:backgroundTint="#6a1b9a"
+            android:id="@+id/useAudio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:padding="0dp"
+            android:text="Use"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>
