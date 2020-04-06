@@ -6,8 +6,6 @@
     android:layout_height="match_parent"
     android:background="#000000">
 
-
-
     <TextureView
         android:id="@+id/texture_view_selfie"
         android:layout_width="match_parent"

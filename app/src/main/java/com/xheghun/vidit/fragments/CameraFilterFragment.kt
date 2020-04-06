@@ -15,7 +15,7 @@ import com.xheghun.vidit.adapter.CamFilterAdapter
 /**
  * A simple [Fragment] subclass.
  */
-class CameraFilterFragment(val title: String) : Fragment() {
+ class CameraFilterFragment(val title: String) : Fragment() {
     private lateinit var mView: View
     private lateinit var recyclerView: RecyclerView
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,

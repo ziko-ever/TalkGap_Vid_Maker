@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import android.widget.ImageButton
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.*
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.LifecycleOwner
@@ -68,6 +69,8 @@ class SelfieFragment : Fragment() {
     private lateinit var mActivity: FragmentManager
     private lateinit var videoProgressBar: ProgressBar
 
+    private lateinit var xActivity: LifecycleOwner
+
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for context!! fragment
@@ -75,6 +78,7 @@ class SelfieFragment : Fragment() {
         mView = inflater.inflate(R.layout.fragment_selfie, container, false)
 
         mActivity =  (super.getActivity()!!.supportFragmentManager)
+        xActivity = (super.getActivity() as LifecycleOwner)
 
 
         textureView = mView.findViewById(R.id.texture_view_selfie)
@@ -200,6 +204,7 @@ class SelfieFragment : Fragment() {
     }
 
     private fun bindCamera() {
+
         CameraX.unbindAll()
 
         val aspectRatio = Rational(textureView.width, textureView.height)
@@ -231,7 +236,7 @@ class SelfieFragment : Fragment() {
         imageCapture = ImageCapture(imageCaptureConfig)
 
         // Bind the camera to the lifecycle
-        CameraX.bindToLifecycle(activity as LifecycleOwner, imageCapture, preview)
+        CameraX.bindToLifecycle(xActivity, imageCapture, preview)
     }
 
     private fun showToast(msg: String) {

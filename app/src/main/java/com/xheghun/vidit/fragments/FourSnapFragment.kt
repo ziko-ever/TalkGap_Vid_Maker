@@ -1,26 +1,34 @@
 package com.xheghun.vidit.fragments
 
 
+import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.util.Rational
 import android.util.Size
-import android.view.LayoutInflater
-import android.view.TextureView
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.ImageButton
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.*
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.LifecycleOwner
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayout
 import com.talkgap.R
+import com.xheghun.vidit.AddMusicActivity
+import com.xheghun.vidit.SelfieVideoEditActivity
 import com.xheghun.vidit.XheghunViewPager
 import com.xheghun.vidit.adapter.TabAdapter
 import com.xheghun.vidit.classes.Animate
+import kotlinx.android.synthetic.main.snap_layout.view.*
+import java.util.concurrent.atomic.AtomicBoolean
 
 class FourSnapFragment : Fragment() {
+    private val ADD_MUSIC_REQUEST_CODE = 9492
     private var lensFacing = CameraX.LensFacing.BACK
     private var imageCapture: ImageCapture? = null
     private lateinit var mView: View
@@ -29,30 +37,58 @@ class FourSnapFragment : Fragment() {
     private lateinit var filterTab: TabLayout
     private lateinit var filterViewPager: XheghunViewPager
 
+    private lateinit var effectsLayout: ViewGroup
+    private lateinit var effectsTab: TabLayout
+    private lateinit var effectsViewPager: XheghunViewPager
 
+    private lateinit var backBtn: View
+    private lateinit var camActionsLayout: ViewGroup
+    private lateinit var snapButton: ImageButton
+    private lateinit var flashToggle: ImageButton
+    private lateinit var switchCamButton: ImageButton
+    private lateinit var close:View
+    private lateinit var timerBtn:View
+    private lateinit var speedBtn : ImageButton
+    private lateinit var filterBtn: ImageButton
+    private lateinit var textureView: TextureView
+    private lateinit var effectsBtn: View
+    private lateinit var mActivity: FragmentManager
+
+    private lateinit var xActivity: LifecycleOwner
+
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for context!! fragment
+        // The view that displays the preview
         mView = inflater.inflate(R.layout.fragment_four_snaps, container, false)
 
-        //filterLayout = mView.findViewById(R.id.filter_layout)
+        mActivity =  (super.getActivity()!!.supportFragmentManager)
+        xActivity = (super.getActivity() as LifecycleOwner)
+
+
+        textureView = mView.findViewById(R.id.texture_view)
+
         filterTab = mView.findViewById(R.id.filter_tab)
         filterLayout = mView.findViewById(R.id.filter_layout)
         filterViewPager = mView.findViewById(R.id.filter_viewpager)
-        val camActionsLayout: ViewGroup = mView.findViewById(R.id.cam_actions_layout)
-        val closeFilterBtn: ImageButton = mView.findViewById(R.id.close_filter_btn)
-        val snapButton: ImageButton = mView.findViewById(R.id.snap_btn)
-        val flashToggle: ImageButton = mView.findViewById(R.id.flash_toggle_btn)
-        val switchCamButton: ImageButton = mView.findViewById(R.id.switch_cam_btn)
-        val close = mView.findViewById<ImageButton>(R.id.close_btn)
-        val timerBtn: ImageButton = mView.findViewById(R.id.timer_btn)
-        val speedBtn : ImageButton = mView.findViewById(R.id.speed_btn)
-        val filterBtn: ImageButton = mView.findViewById(R.id.filter_btn)
+
+        effectsTab = mView.findViewById(R.id.effects_tab)
+        effectsLayout = mView.findViewById(R.id.effects_layout)
+        effectsViewPager = mView.findViewById(R.id.effects_viewpager)
+
+        effectsBtn = mView.findViewById(R.id.effects_btn)
+        backBtn = mView.findViewById<ImageButton>(R.id.back_btn)
+        camActionsLayout = mView.findViewById(R.id.cam_actions_layout)
+        snapButton = mView.findViewById(R.id.snap_btn)
+        flashToggle = mView.findViewById(R.id.flash_toggle_btn)
+        switchCamButton = mView.findViewById(R.id.switch_cam_btn)
+        close = mView.findViewById<ImageButton>(R.id.close_btn)
+        timerBtn = mView.findViewById(R.id.timer_btn)
+        speedBtn = mView.findViewById(R.id.speed_btn)
+        filterBtn = mView.findViewById(R.id.filter_btn)
 
         initFilters()
-
-        snapButton.setOnClickListener {
-            showToast("Snap Clicked")
-        }
+        initEffects()
 
         flashToggle.setOnClickListener {
             if (flashOn) {
@@ -69,23 +105,36 @@ class FourSnapFragment : Fragment() {
             showToast("Close")
         }
 
+        backBtn.setOnClickListener {
+            showCamActions()
+        }
+
+        textureView.setOnClickListener {
+            showCamActions()
+        }
+
         filterBtn.setOnClickListener {
             if (filterLayout.visibility == View.INVISIBLE || filterLayout.visibility == View.GONE) {
+                backBtn.visibility = View.VISIBLE
                 Animate.slideInUp(filterLayout,context)
                 Animate.slideOutLeft(close,context)
                 Animate.slideOutRight(camActionsLayout,context)
             } else {
                 Animate.slideOutDown(filterLayout,context)
             }
-
-
             showToast("filter clicked")
         }
 
-        closeFilterBtn.setOnClickListener {
-            Animate.slideOutDown( filterLayout,context)
-            Animate.slideInLeft(close,context)
-            Animate.slideInRight(camActionsLayout,context)
+        effectsBtn.setOnClickListener {
+            if (effectsLayout.visibility == View.INVISIBLE || effectsLayout.visibility == View.GONE) {
+                backBtn.visibility = View.VISIBLE
+                Animate.slideInUp(effectsLayout,context)
+                Animate.slideOutLeft(close,context)
+                Animate.slideOutRight(camActionsLayout,context)
+            } else {
+                Animate.slideOutDown(effectsLayout,context)
+            }
+            showToast("effects clicked")
         }
 
         speedBtn.setOnClickListener { showToast("speed clicked") }
@@ -99,9 +148,8 @@ class FourSnapFragment : Fragment() {
     }
 
     private fun bindCamera() {
+
         CameraX.unbindAll()
-        // The view that displays the preview
-        val textureView: TextureView = mView.findViewById(R.id.texture_view)
 
         val aspectRatio = Rational(textureView.width, textureView.height)
         val screen = Size(textureView.width, textureView.height)
@@ -132,7 +180,7 @@ class FourSnapFragment : Fragment() {
         imageCapture = ImageCapture(imageCaptureConfig)
 
         // Bind the camera to the lifecycle
-        CameraX.bindToLifecycle(activity as LifecycleOwner, imageCapture, preview)
+        CameraX.bindToLifecycle(xActivity, imageCapture, preview)
     }
 
     private fun showToast(msg: String) {
@@ -140,12 +188,37 @@ class FourSnapFragment : Fragment() {
     }
 
     private fun initFilters() {
-        val adapter = TabAdapter((context as AppCompatActivity).supportFragmentManager,1)
-        adapter.addFragment(CameraFilterFragment("Portrait"),"Portrait")
-        adapter.addFragment(CameraFilterFragment("landscape"),"Landscape")
-        adapter.addFragment(CameraFilterFragment("food"),"Food")
+        val adapter = TabAdapter(mActivity,0)
+        adapter.addFragment(CameraFilterFragment("PRT "),"Portrait")
+        adapter.addFragment(CameraFilterFragment("LND "),"Landscape")
+        adapter.addFragment(CameraFilterFragment("STL "),"Style-Leo")
+
 
         filterViewPager.adapter = adapter
         filterTab.setupWithViewPager(filterViewPager)
     }
+
+    private fun initEffects() {
+        val adapter = TabAdapter(mActivity,0)
+        adapter.addFragment(CamEffectsFragment(8),"Free")
+        adapter.addFragment(CamEffectsFragment(6),"My Effects")
+        adapter.addFragment(CamEffectsFragment(12),"Favourite")
+
+        effectsViewPager.adapter = adapter
+        effectsTab.setupWithViewPager(effectsViewPager)
+    }
+
+    private fun showCamActions() {
+        if (camActionsLayout.visibility == View.GONE) {
+            Animate.slideInLeft(close, context)
+            Animate.slideInRight(camActionsLayout, context)
+        }
+        backBtn.visibility = View.GONE
+        if (filterLayout.visibility == View.VISIBLE) {
+            Animate.slideOutDown(filterLayout,context)
+        } else if (effectsLayout.visibility == View.VISIBLE) {
+            Animate.slideOutDown(effectsLayout,context)
+        }
+    }
+
 }
