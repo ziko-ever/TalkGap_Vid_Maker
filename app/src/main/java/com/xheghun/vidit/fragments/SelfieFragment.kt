@@ -247,7 +247,7 @@ class SelfieFragment : Fragment() {
         adapter.addFragment(CameraFilterFragment("PRT "),"Portrait")
         adapter.addFragment(CameraFilterFragment("LND "),"Landscape")
         adapter.addFragment(CameraFilterFragment("STL "),"Style-Leo")
-
+        adapter.notifyDataSetChanged()
         filterViewPager.offscreenPageLimit = 3
         filterViewPager.adapter = adapter
 
@@ -259,7 +259,7 @@ class SelfieFragment : Fragment() {
         adapter.addFragment(CamEffectsFragment(8),"Free")
         adapter.addFragment(CamEffectsFragment(6),"My Effects")
         adapter.addFragment(CamEffectsFragment(12),"Favourite")
-
+        adapter.notifyDataSetChanged()
         effectsViewPager.offscreenPageLimit = 3
         effectsViewPager.adapter = adapter
 

@@ -16,11 +16,13 @@ import androidx.camera.core.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.LifecycleOwner
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayout
 import com.talkgap.R
 import com.xheghun.vidit.AddMusicActivity
 import com.xheghun.vidit.SelfieVideoEditActivity
+import com.xheghun.vidit.VideoEditActivity
 import com.xheghun.vidit.XheghunViewPager
 import com.xheghun.vidit.adapter.TabAdapter
 import com.xheghun.vidit.classes.Animate
@@ -53,6 +55,8 @@ class FourSnapFragment : Fragment() {
     private lateinit var textureView: TextureView
     private lateinit var effectsBtn: View
     private lateinit var mActivity: FragmentManager
+    private lateinit var nextFab: FloatingActionButton
+    private lateinit var cancelButton: MaterialButton
 
     private lateinit var xActivity: LifecycleOwner
 
@@ -76,6 +80,8 @@ class FourSnapFragment : Fragment() {
         effectsLayout = mView.findViewById(R.id.effects_layout)
         effectsViewPager = mView.findViewById(R.id.effects_viewpager)
 
+        cancelButton = mView.findViewById(R.id.cancel_snap_btn)
+        nextFab = mView.findViewById(R.id.next_fab)
         effectsBtn = mView.findViewById(R.id.effects_btn)
         backBtn = mView.findViewById<ImageButton>(R.id.back_btn)
         camActionsLayout = mView.findViewById(R.id.cam_actions_layout)
@@ -105,12 +111,26 @@ class FourSnapFragment : Fragment() {
             showToast("Close")
         }
 
+        cancelButton.setOnClickListener {
+            nextFab.hide()
+            cancelButton.visibility = View.INVISIBLE
+        }
+
+        nextFab.setOnClickListener {
+            startActivity(Intent(context,VideoEditActivity::class.java))
+        }
+
         backBtn.setOnClickListener {
             showCamActions()
         }
 
         textureView.setOnClickListener {
             showCamActions()
+        }
+
+        snapButton.setOnClickListener {
+            nextFab.show()
+            cancelButton.visibility = View.VISIBLE
         }
 
         filterBtn.setOnClickListener {
@@ -192,10 +212,10 @@ class FourSnapFragment : Fragment() {
         adapter.addFragment(CameraFilterFragment("PRT "),"Portrait")
         adapter.addFragment(CameraFilterFragment("LND "),"Landscape")
         adapter.addFragment(CameraFilterFragment("STL "),"Style-Leo")
+        adapter.notifyDataSetChanged()
 
-
-        filterViewPager.adapter = adapter
         filterViewPager.offscreenPageLimit = 3
+        filterViewPager.adapter = adapter
         filterTab.setupWithViewPager(filterViewPager)
     }
 
@@ -204,9 +224,10 @@ class FourSnapFragment : Fragment() {
         adapter.addFragment(CamEffectsFragment(8),"Free")
         adapter.addFragment(CamEffectsFragment(6),"My Effects")
         adapter.addFragment(CamEffectsFragment(12),"Favourite")
-
-        effectsViewPager.adapter = adapter
+        adapter.notifyDataSetChanged()
         effectsViewPager.offscreenPageLimit = 3
+        effectsViewPager.adapter = adapter
+
         effectsTab.setupWithViewPager(effectsViewPager)
     }
 

@@ -6,7 +6,6 @@
     <string name="home">Home</string>
     <string name="camera">Camera</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_video_editor">Video Editor</string>
     <string name="action_settings">Settings</string>
@@ -47,5 +46,13 @@
     <string name="images_tab">Images</string>
 
     <string name="app_name_custom">- Talk Gap -</string>
+    <string name="theme">Theme</string>
+    <string name="music">Music</string>
+    <string name="undo">undo</string>
+    <string name="redo">redo</string>
+    <string name="quick_effects">quick effects</string>
+    <string name="sound">sound</string>
+    <string name="volume">volume</string>
+    <string name="cover">cover</string>
 
 </resources>

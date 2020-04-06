@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/black"
-    tools:context=".VideoEditActivity">
+    tools:context="com.xheghun.vidit.VideoEditActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:layout_alignParentTop="true"
@@ -20,12 +20,15 @@
         android:layout_height="wrap_content"/>
 
 
-    <VideoView
-        android:layout_centerInParent="true"
-        android:id="@+id/videoView"
-        android:layout_margin="13dp"
+    <ImageView
+        android:id="@+id/image_thumb"
+        android:layout_below="@id/toolbar"
+        android:layout_above="@id/cut_tools"
+        android:layout_margin="16dp"
+        android:src="@drawable/afro_woman"
+        android:scaleType="centerCrop"
         android:layout_width="match_parent"
-        android:layout_height="220dp"/>
+        android:layout_height="match_parent"/>
 
 
 
