@@ -52,7 +52,7 @@ public class GalleryActivity extends AppCompatActivity {
                     @Override
                     public void onPermissionsChecked(MultiplePermissionsReport report) {
                         if (report.areAllPermissionsGranted()) {
-                            TabAdapter adapter = new TabAdapter(getSupportFragmentManager(), 0);
+                            TabAdapter adapter = new TabAdapter(getSupportFragmentManager(),2);
                             adapter.addFragment(new GalleryImageFragment(), "Images");
                             adapter.addFragment(new GalleryVideoFragment(), "Videos");
                             pager.setAdapter(adapter);

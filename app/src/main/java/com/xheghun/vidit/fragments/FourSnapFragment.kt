@@ -195,16 +195,18 @@ class FourSnapFragment : Fragment() {
 
 
         filterViewPager.adapter = adapter
+        filterViewPager.offscreenPageLimit = 3
         filterTab.setupWithViewPager(filterViewPager)
     }
 
     private fun initEffects() {
-        val adapter = TabAdapter(mActivity,0)
+        val adapter = TabAdapter(mActivity,1)
         adapter.addFragment(CamEffectsFragment(8),"Free")
         adapter.addFragment(CamEffectsFragment(6),"My Effects")
         adapter.addFragment(CamEffectsFragment(12),"Favourite")
 
         effectsViewPager.adapter = adapter
+        effectsViewPager.offscreenPageLimit = 3
         effectsTab.setupWithViewPager(effectsViewPager)
     }
 

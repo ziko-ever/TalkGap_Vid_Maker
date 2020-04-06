@@ -35,4 +35,9 @@ public final class XheghunViewPager extends ViewPager {
         }
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
+
+    @Override
+    public void setOffscreenPageLimit(int limit) {
+        super.setOffscreenPageLimit(limit);
+    }
 }

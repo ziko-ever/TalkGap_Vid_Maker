@@ -242,28 +242,29 @@ class SelfieFragment : Fragment() {
     private fun showToast(msg: String) {
         Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
     }
-
     private fun initFilters() {
         val adapter = TabAdapter(mActivity,0)
         adapter.addFragment(CameraFilterFragment("PRT "),"Portrait")
         adapter.addFragment(CameraFilterFragment("LND "),"Landscape")
         adapter.addFragment(CameraFilterFragment("STL "),"Style-Leo")
 
-
+        filterViewPager.offscreenPageLimit = 3
         filterViewPager.adapter = adapter
+
         filterTab.setupWithViewPager(filterViewPager)
     }
 
-   private fun initEffects() {
-        val adapter = TabAdapter(mActivity,0)
+    private fun initEffects() {
+        val adapter = TabAdapter(mActivity,1)
         adapter.addFragment(CamEffectsFragment(8),"Free")
         adapter.addFragment(CamEffectsFragment(6),"My Effects")
         adapter.addFragment(CamEffectsFragment(12),"Favourite")
 
+        effectsViewPager.offscreenPageLimit = 3
         effectsViewPager.adapter = adapter
+
         effectsTab.setupWithViewPager(effectsViewPager)
     }
-
     private fun showCamActions() {
         if (camActionsLayout.visibility == View.GONE) {
             Animate.slideInLeft(close, context)

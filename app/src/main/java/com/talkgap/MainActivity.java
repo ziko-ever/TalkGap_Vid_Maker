@@ -62,11 +62,13 @@ public class MainActivity extends AppCompatActivity{
     private void loadFragments() {
         viewPager = findViewById( R.id.viewPager);
         tabLayout = findViewById(R.id.tabLayout);
-        adapter = new TabAdapter(getSupportFragmentManager(), 0);
+        adapter = new TabAdapter(getSupportFragmentManager(),4);
         adapter.addFragment(new GalleryFragment(), getResources().getString(R.string.gallery));
         adapter.addFragment(new SelfieFragment(),"Selfie");
         adapter.addFragment(new FourSnapFragment(), getResources().getString(R.string.four_snaps));
+        viewPager.setOffscreenPageLimit(3);
         viewPager.setAdapter(adapter);
+
         viewPager.setCurrentItem(1);
         tabLayout.setupWithViewPager(viewPager);
     }
