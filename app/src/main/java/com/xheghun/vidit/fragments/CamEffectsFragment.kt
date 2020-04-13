@@ -24,7 +24,7 @@ import java.util.ArrayList
  * A simple [Fragment] subclass.
  */
 
-class CamEffectsFragment(val count: Int) : Fragment(), EffectsItemClickListener {
+class CamEffectsFragment : Fragment(), EffectsItemClickListener {
 
     private lateinit var mView: View
     private lateinit var recyclerView: RecyclerView
@@ -41,7 +41,7 @@ class CamEffectsFragment(val count: Int) : Fragment(), EffectsItemClickListener 
 
         var x = 0
 
-        while (x < count) {
+        while (x < 11) {
             val effect = EffectsItem()
             effect.isLocked = isLocked
             isLocked = !isLocked
@@ -68,7 +68,7 @@ class CamEffectsFragment(val count: Int) : Fragment(), EffectsItemClickListener 
         alertDialog.setTitle("Unlock effect")
         val items = arrayOf("unlock this effect \t 5 KozCoin", "unlock all effects  50 KozCoin")
         var checkedItem = 1
-        alertDialog.setSingleChoiceItems(items, checkedItem) { dialog, which ->
+        alertDialog.setSingleChoiceItems(items, checkedItem) { _, which ->
             when (which) {
                 0 -> {
                     checkedItem = 0

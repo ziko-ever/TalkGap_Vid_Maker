@@ -11,7 +11,15 @@
         android:id="@+id/texture_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/status_margin"
+        android:layout_width="match_parent"
+        android:layout_height="28dp"/>
+
     <ImageButton
+        android:layout_below="@id/status_margin"
         android:layout_margin="5dp"
         android:id="@+id/close_btn"
         android:padding="@dimen/dp5"
@@ -20,6 +28,7 @@
         android:layout_height="wrap_content"
         android:src="@drawable/ic_clear"/>
     <ImageButton
+        android:layout_below="@id/status_margin"
         android:layout_margin="5dp"
         android:id="@+id/back_btn"
         android:padding="@dimen/dp5"
@@ -28,58 +37,8 @@
         android:layout_height="wrap_content"
         android:visibility="gone"
         android:src="@drawable/ic_arrow_back"/>
-    <LinearLayout
 
-        android:id="@+id/cam_actions_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:orientation="vertical">
-        <ImageButton
-            style="@style/clickableImageButton"
-            android:layout_margin="5dp"
-            android:id="@+id/switch_cam_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_autorenew"/>
-        <ImageButton
-            android:layout_margin="5dp"
-            style="@style/clickableImageButton"
-            android:id="@+id/flash_toggle_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_flash_on"/>
-        <ImageButton
-            style="@style/clickableImageButton"
-            android:layout_margin="5dp"
-            android:id="@+id/timer_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_timer"/>
-        <ImageButton
-            style="@style/clickableImageButton"
-            android:layout_margin="5dp"
-            android:id="@+id/speed_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_speed"/>
-        <ImageButton
-            style="@style/clickableImageButton"
-            android:layout_margin="5dp"
-            android:id="@+id/filter_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_filter"/>
-
-            <ImageButton
-                style="@style/clickableImageButton"
-                android:layout_margin="5dp"
-                android:id="@+id/effects_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_color_lens"/>
-
-    </LinearLayout>
+    <include layout="@layout/four_snap_cam_actions" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -88,11 +47,23 @@
         android:padding="@dimen/dp5"
         android:orientation="horizontal"
         android:layout_above="@id/cancel_snap_btn">
-        <ImageButton
-            android:id="@+id/snap_btn"
+        <LinearLayout
+            android:id="@+id/snap_btn_lyt"
             android:background="@drawable/circle_outline"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:gravity="center"
+            android:layout_height="wrap_content">
+            <TextView
+                android:background="@drawable/solid_circle"
+                android:id="@+id/snap_btn"
+                android:gravity="center"
+                android:textAllCaps="true"
+                android:fontFamily="@font/open_sans_semi_bold"
+                android:text="@string/snap"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:visibility="gone"
@@ -119,8 +90,52 @@
         style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_height="wrap_content"/>
 
-    <include layout="@layout/filter_layout" />
+    <LinearLayout
+        android:visibility="gone"
+        android:background="#90000000"
+        android:id="@+id/effects_layout_4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
 
-    <include layout="@layout/effects_layout"/>
+        <com.google.android.material.tabs.TabLayout
+            app:tabTextAppearance="@style/tabTextAppearance"
+            android:background="#90000000"
+            app:tabTextColor="@android:color/white"
+            app:tabIndicatorColor="@android:color/white"
+            android:id="@+id/effects_tab_4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <com.xheghun.vidit.XheghunViewPager
+            android:id="@+id/effects_viewpager_4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:visibility="gone"
+        android:background="#90000000"
+        android:id="@+id/filter_layout_4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
+
+        <com.google.android.material.tabs.TabLayout
+            app:tabTextAppearance="@style/tabTextAppearance"
+            android:background="#90000000"
+            app:tabTextColor="@android:color/white"
+            app:tabIndicatorColor="@android:color/white"
+            android:id="@+id/filter_tab_4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <com.xheghun.vidit.XheghunViewPager
+            android:id="@+id/filter_viewpager_4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 
 </RelativeLayout>

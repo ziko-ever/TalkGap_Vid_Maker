@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,45 +8,232 @@
     tools:context="com.xheghun.vidit.VideoEditActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:layout_alignParentTop="true"
         android:id="@+id/toolbar"
-        app:title="@string/trim_video"
-        app:menu="@menu/single_done_item"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@color/black"
+        app:menu="@menu/single_done_item"
         app:navigationIcon="@drawable/ic_clear"
-        app:titleTextColor="@android:color/white"
-        android:background="@color/colorPrimary"
-        android:layout_height="wrap_content"/>
+        app:title="Edit Video"
+        app:titleTextColor="@android:color/white" />
 
 
     <ImageView
         android:id="@+id/image_thumb"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_below="@id/toolbar"
-        android:layout_above="@id/cut_tools"
         android:layout_margin="16dp"
-        android:src="@drawable/afro_woman"
         android:scaleType="centerCrop"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:src="@drawable/afro_woman" />
 
+    <include layout="@layout/theme_layout" />
 
+    <include
+        layout="@layout/filter_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/cut_tools" />
 
-    <ProgressBar
-        android:id="@+id/progress"
+    <include
+        layout="@layout/effects_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/cut_tools" />
+
+    <include layout="@layout/sound_adjust" />
+
+    <LinearLayout
+        android:id="@+id/clip_edit_layout"
         android:visibility="gone"
-        android:indeterminate="true"
-        style="@style/customHorzontalProgressBar"
-        android:layout_below="@id/toolbar"
+        android:layout_above="@id/cut_tools"
         android:layout_width="match_parent"
-        android:layout_height="8dp"/>
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/edit_clip_tools"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:labelVisibilityMode="labeled"
+            app:itemIconTint="@drawable/clip_edit_color_state"
+            app:itemTextColor="@drawable/clip_edit_color_state"
+            app:menu="@menu/clip_edit_items"
+            android:background="#90000000"/>
+        <RelativeLayout
+            android:background="#90000000"
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:visibility="gone"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:id="@+id/add_sound_layout"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:drawableTop="@drawable/ic_play_circle_outline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="14sp"
+                    android:layout_marginEnd="4dp"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:text="tap to a sound"/>
+                <ImageView
+                    android:src="@drawable/afro_woman"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"/>
+                <ImageView
+                    android:src="@drawable/afro_woman"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"/>
+                <ImageView
+                    android:src="@drawable/afro_woman"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"/>
+                <ImageView
+                    android:src="@drawable/afro_woman"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"/>
+                <ImageView
+                    android:src="@drawable/afro_woman"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"/>
+                <ImageView
+                android:src="@drawable/afro_woman"
+                android:layout_width="30dp"
+                android:layout_height="30dp"/>
+                <ImageView
+                android:src="@drawable/afro_woman"
+                android:layout_width="30dp"
+                android:layout_height="30dp"/>
+                <ImageView
+                android:src="@drawable/afro_woman"
+                android:layout_width="30dp"
+                android:layout_height="30dp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/stickers_layout"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/stickers_rc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <LinearLayout
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/canvas_layout"
+                android:orientation="horizontal">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/canvas_rc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <LinearLayout
+                android:visibility="visible"
+                android:id="@+id/add_text_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <ImageButton
+                        android:padding="@dimen/dp5"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_play_circle_outline"/>
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent">
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/afro_woman"/>
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/afro_woman"/>
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/afro_woman"/>
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/afro_woman"/>
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/afro_woman"/>
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/afro_woman"/>
+                        <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/afro_woman"/>
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/afro_woman"/>
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/afro_woman"/>
+                        <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/afro_woman"/>
 
-     <com.google.android.material.bottomnavigation.BottomNavigationView
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-         android:layout_alignParentBottom="true"
-         android:background="@android:color/black"
-         app:itemIconTint="@drawable/bottom_nav_color_state"
-         app:itemTextColor="@drawable/bottom_nav_color_state"
-         app:menu="@menu/video_trim_menu"
-         android:id="@+id/cut_tools"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <ImageButton
+                        android:padding="@dimen/dp5"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_edit"/>
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"/>
+                    <ImageButton
+                        android:padding="@dimen/dp5"
+                        android:src="@drawable/ic_add_circle"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+            </LinearLayout>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/cut_tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#90000000"
+        app:itemIconTint="@drawable/bottom_nav_color_state"
+        app:itemTextColor="@drawable/bottom_nav_color_state"
+        app:menu="@menu/video_trim_menu" />
 </RelativeLayout>

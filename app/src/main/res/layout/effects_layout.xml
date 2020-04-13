@@ -9,7 +9,7 @@
     android:layout_height="wrap_content"
     android:layout_alignParentBottom="true"
     android:orientation="vertical"
-    tools:showIn="@layout/fragment_selfie">
+    tools:showIn="@layout/fragment_four_snaps">
 
     <com.google.android.material.tabs.TabLayout
         app:tabTextAppearance="@style/tabTextAppearance"

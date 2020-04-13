@@ -18,10 +18,34 @@
             android:adjustViewBounds="true"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/item_selected"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#90000000"
+            android:gravity="center"
+            android:textSize="28sp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/open_sans_bold"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#40000000"/>
         <ImageView
+            android:id="@+id/cut_vid_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_videocam"
+            android:padding="@dimen/dp5"
+            android:layout_margin="2dp"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/black_circle"
+            android:src="@drawable/ic_content_cut"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00.00"
+            android:textColor="@color/white"
             android:layout_alignParentBottom="true"
             android:layout_margin="5dp"/>
     </RelativeLayout>

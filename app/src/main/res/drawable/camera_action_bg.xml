@@ -6,10 +6,10 @@
             <solid android:color="#906d6d6d" />
             <corners android:radius="200dp" />
             <padding
-                android:bottom="8dp"
-                android:left="8dp"
-                android:right="8dp"
-                android:top="8dp" />
+                android:bottom="4dp"
+                android:left="4dp"
+                android:right="4dp"
+                android:top="4dp" />
         </shape>
     </item>
     <item android:id="@android:id/background">
@@ -17,10 +17,10 @@
             android:shape="rectangle">
             <solid android:color="#906d6d6d"/>
             <corners android:radius="200dp"/>
-            <padding android:bottom="8dp"
-                android:top="8dp"
-                android:left="8dp"
-                android:right="8dp"/>
+            <padding android:bottom="4dp"
+                android:top="4dp"
+                android:left="4dp"
+                android:right="4dp"/>
         </shape>
     </item>
 </ripple>

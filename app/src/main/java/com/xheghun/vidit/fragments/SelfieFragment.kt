@@ -57,7 +57,7 @@ class SelfieFragment : Fragment() {
     private lateinit var snapLayout: ViewGroup
     private lateinit var addMusicBtn: View
     private lateinit var camActionsLayout: ViewGroup
-    private lateinit var snapButton: ImageButton
+    private lateinit var snapButton: View
     private lateinit var flashToggle: ImageButton
     private lateinit var switchCamButton: ImageButton
     private lateinit var close:View
@@ -110,7 +110,7 @@ class SelfieFragment : Fragment() {
         initEffects()
 
 
-        snapButton.setOnTouchListener { v, event ->
+        snapButton.setOnTouchListener { _, event ->
             if (event.action == MotionEvent.ACTION_DOWN) {
                 Thread.sleep(1000)
 
@@ -256,9 +256,9 @@ class SelfieFragment : Fragment() {
 
     private fun initEffects() {
         val adapter = TabAdapter(mActivity,1)
-        adapter.addFragment(CamEffectsFragment(8),"Free")
-        adapter.addFragment(CamEffectsFragment(6),"My Effects")
-        adapter.addFragment(CamEffectsFragment(12),"Favourite")
+        adapter.addFragment(CamEffectsFragment(),"Free")
+        adapter.addFragment(CamEffectsFragment(),"My Effects")
+        adapter.addFragment(CamEffectsFragment(),"Favourite")
         adapter.notifyDataSetChanged()
         effectsViewPager.offscreenPageLimit = 3
         effectsViewPager.adapter = adapter

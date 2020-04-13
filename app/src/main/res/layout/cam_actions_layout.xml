@@ -17,13 +17,28 @@
         android:layout_height="wrap_content"
         android:src="@drawable/ic_autorenew" />
 
+    <TextView
+        style="@style/camActionsTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Camera"
+        android:layout_gravity="center"/>
+
+
     <ImageButton
         android:layout_margin="5dp"
         style="@style/clickableImageButton"
-        android:id="@+id/flash_toggle_btn"
+           android:id="@+id/flash_toggle_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_flash_on" />
+
+    <TextView
+        style="@style/camActionsTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Flash"
+        android:layout_gravity="center"/>
 
     <ImageButton
         style="@style/clickableImageButton"
@@ -33,6 +48,13 @@
         android:layout_height="wrap_content"
         android:src="@drawable/ic_timer" />
 
+    <TextView
+        style="@style/camActionsTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Timer"
+        android:layout_gravity="center"/>
+
     <ImageButton
         style="@style/clickableImageButton"
         android:layout_margin="5dp"
@@ -41,6 +63,13 @@
         android:layout_height="wrap_content"
         android:src="@drawable/ic_speed" />
 
+    <TextView
+        style="@style/camActionsTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Speed"
+        android:layout_gravity="center"/>
+
     <ImageButton
         style="@style/clickableImageButton"
         android:layout_margin="5dp"
@@ -48,4 +77,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_filter" />
+
+    <TextView
+        style="@style/camActionsTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Filter"
+        android:layout_gravity="center"/>
 </LinearLayout>

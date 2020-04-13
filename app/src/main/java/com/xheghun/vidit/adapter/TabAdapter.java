@@ -1,13 +1,19 @@
 package com.xheghun.vidit.adapter;
 
+import android.content.Context;
 import android.icu.text.CaseMap;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +38,7 @@ public class TabAdapter extends FragmentStatePagerAdapter {
         mFragmentTitleList.add(title);
 
     }
+
 
     @Nullable
     @Override

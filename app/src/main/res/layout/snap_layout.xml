@@ -17,6 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp">
+
         <ImageButton
             android:layout_centerHorizontal="true"
             android:id="@+id/lt2"
@@ -44,15 +45,31 @@
 
     </RelativeLayout>
 
-    <ImageButton
+
+    <LinearLayout
+        android:background="@drawable/circle_outline"
+        android:backgroundTint="@color/colorPrimary"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="30dp"
-        android:id="@+id/snap_btn"
+        android:gravity="center"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/circle_outline"
-        android:clickable="true"
-        android:focusable="true" />
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:background="@drawable/solid_circle"
+            android:backgroundTint="@color/colorPrimary"
+            android:id="@+id/snap_btn"
+            android:textColor="@color/white"
+            android:text="@string/hold"
+            android:gravity="center"
+            android:textAllCaps="true"
+            android:fontFamily="@font/open_sans_semi_bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true" />
+    </LinearLayout>
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:visibility="gone"

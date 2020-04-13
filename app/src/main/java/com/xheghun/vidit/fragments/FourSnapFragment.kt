@@ -24,8 +24,10 @@ import com.xheghun.vidit.AddMusicActivity
 import com.xheghun.vidit.SelfieVideoEditActivity
 import com.xheghun.vidit.VideoEditActivity
 import com.xheghun.vidit.XheghunViewPager
+import com.xheghun.vidit.adapter.CamFilterAdapter
 import com.xheghun.vidit.adapter.TabAdapter
 import com.xheghun.vidit.classes.Animate
+import kotlinx.android.synthetic.main.fragment_four_snaps.*
 import kotlinx.android.synthetic.main.snap_layout.view.*
 import java.util.concurrent.atomic.AtomicBoolean
 
@@ -45,7 +47,7 @@ class FourSnapFragment : Fragment() {
 
     private lateinit var backBtn: View
     private lateinit var camActionsLayout: ViewGroup
-    private lateinit var snapButton: ImageButton
+    private lateinit var snapButton: View
     private lateinit var flashToggle: ImageButton
     private lateinit var switchCamButton: ImageButton
     private lateinit var close:View
@@ -72,13 +74,13 @@ class FourSnapFragment : Fragment() {
 
         textureView = mView.findViewById(R.id.texture_view)
 
-        filterTab = mView.findViewById(R.id.filter_tab)
-        filterLayout = mView.findViewById(R.id.filter_layout)
-        filterViewPager = mView.findViewById(R.id.filter_viewpager)
+        filterTab = mView.findViewById(R.id.filter_tab_4)
+        filterLayout = mView.findViewById(R.id.filter_layout_4)
+        filterViewPager = mView.findViewById(R.id.filter_viewpager_4)
 
-        effectsTab = mView.findViewById(R.id.effects_tab)
-        effectsLayout = mView.findViewById(R.id.effects_layout)
-        effectsViewPager = mView.findViewById(R.id.effects_viewpager)
+        effectsTab = mView.findViewById(R.id.effects_tab_4)
+        effectsLayout = mView.findViewById(R.id.effects_layout_4)
+        effectsViewPager = mView.findViewById(R.id.effects_viewpager_4)
 
         cancelButton = mView.findViewById(R.id.cancel_snap_btn)
         nextFab = mView.findViewById(R.id.next_fab)
@@ -139,6 +141,7 @@ class FourSnapFragment : Fragment() {
                 Animate.slideInUp(filterLayout,context)
                 Animate.slideOutLeft(close,context)
                 Animate.slideOutRight(camActionsLayout,context)
+                Animate.fadeOutAnimation(snap_btn_lyt,context)
             } else {
                 Animate.slideOutDown(filterLayout,context)
             }
@@ -151,6 +154,7 @@ class FourSnapFragment : Fragment() {
                 Animate.slideInUp(effectsLayout,context)
                 Animate.slideOutLeft(close,context)
                 Animate.slideOutRight(camActionsLayout,context)
+                Animate.fadeOutAnimation(snap_btn_lyt,context)
             } else {
                 Animate.slideOutDown(effectsLayout,context)
             }
@@ -221,12 +225,20 @@ class FourSnapFragment : Fragment() {
 
     private fun initEffects() {
         val adapter = TabAdapter(mActivity,1)
-        adapter.addFragment(CamEffectsFragment(8),"Free")
-        adapter.addFragment(CamEffectsFragment(6),"My Effects")
-        adapter.addFragment(CamEffectsFragment(12),"Favourite")
+        adapter.addFragment(CamEffectsFragment(),"Free")
+        adapter.addFragment(CamEffectsFragment(),"My Effects")
+        adapter.addFragment(CamEffectsFragment(),"Favourite")
         adapter.notifyDataSetChanged()
+
+        effectsViewPager.requestFocus()
+
         effectsViewPager.offscreenPageLimit = 3
+
+
+
         effectsViewPager.adapter = adapter
+
+
 
         effectsTab.setupWithViewPager(effectsViewPager)
     }
@@ -235,6 +247,7 @@ class FourSnapFragment : Fragment() {
         if (camActionsLayout.visibility == View.GONE) {
             Animate.slideInLeft(close, context)
             Animate.slideInRight(camActionsLayout, context)
+            Animate.fadeInAnimation(snap_btn_lyt,context)
         }
         backBtn.visibility = View.GONE
         if (filterLayout.visibility == View.VISIBLE) {

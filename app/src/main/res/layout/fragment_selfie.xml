@@ -11,7 +11,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/status_margin"
+        android:layout_width="match_parent"
+        android:layout_height="28dp"/>
+
     <ProgressBar
+        android:layout_below="@id/status_margin"
         android:id="@+id/video_progress_bar"
         android:layout_marginStart="4dp"
         android:layout_marginEnd="4dp"
@@ -22,6 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="6dp"/>
     <ImageButton
+        android:layout_below="@id/video_progress_bar"
         android:visibility="gone"
         android:layout_margin="5dp"
         android:id="@+id/back_btn"
@@ -45,7 +53,7 @@
         android:layout_height="wrap_content"
         android:src="@drawable/ic_clear"/>
 
-    <include layout="@layout/cam_actions_layout" />
+    <include  layout="@layout/cam_actions_layout" />
 
     <include layout="@layout/filter_layout" />
 

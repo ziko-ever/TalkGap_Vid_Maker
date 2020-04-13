@@ -5,22 +5,33 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/black"
     tools:context="com.xheghun.vidit.GalleryActivity">
 
-    <com.google.android.material.appbar.AppBarLayout
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <ImageButton
+            android:padding="@dimen/dp5"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_close"/>
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/gallery_tab_layout"
-            android:layout_width="match_parent"
+            app:tabBackground="@color/gray"
+            android:layout_width="wrap_content"
             app:tabTextAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
             app:tabSelectedTextColor="@android:color/white"
             app:tabIndicatorColor="@android:color/white"
             android:layout_height="wrap_content"
             android:minHeight="?actionBarSize"
             android:background="@color/colorPrimary"
-            app:tabGravity="fill"/>
-    </com.google.android.material.appbar.AppBarLayout>
+            app:tabGravity="center"/>
+    </LinearLayout>
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/gallery_viewpager"

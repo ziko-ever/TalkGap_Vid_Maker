@@ -22,8 +22,30 @@
         android:layout_height="wrap_content"
         android:src="@drawable/ic_close"/>
 
+    <ImageButton
+        android:layout_margin="5dp"
+        android:id="@+id/filter_btn"
+        style="@style/clickableImageButton"
+        android:layout_alignParentEnd="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_filter"/>
+
+    <ImageButton
+        android:layout_margin="5dp"
+        android:id="@+id/back_btn"
+        android:visibility="gone"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="@dimen/dp5"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_arrow_back"/>
+
     <LinearLayout
         android:gravity="center"
+        android:id="@+id/tools_layout"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -38,6 +60,7 @@
             android:gravity="center"
             android:orientation="vertical">
             <ImageButton
+                android:id="@+id/quick_effects_btn"
                 style="@style/clickableImageButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -59,6 +82,7 @@
             android:orientation="vertical">
             <ImageButton
                 style="@style/clickableImageButton"
+                android:id="@+id/sound_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_music_note"/>
@@ -80,6 +104,7 @@
                 style="@style/clickableImageButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/volume_btn"
                 android:src="@drawable/ic_tune"/>
             <TextView
                 android:layout_marginTop="2dp"
@@ -96,6 +121,7 @@
             android:gravity="center"
             android:orientation="vertical">
             <ImageButton
+                android:id="@+id/cover_btn"
                 style="@style/clickableImageButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -107,13 +133,74 @@
                 android:textColor="@color/white"
                 android:textSize="12sp"
                 android:text="@string/cover"/>
+
         </LinearLayout>
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/forward_btn"
+            app:backgroundTint="@color/colorPrimary"
             android:layout_margin="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:fabSize="mini"
-            android:src="@drawable/ic_arrow_forward"/>
+            app:iconGravity="textStart"
+            app:icon="@drawable/ic_arrow_forward"/>
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/adjust_volume_layout"
+        android:visibility="gone"
+        android:background="#90000000"
+        android:padding="12dp"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:fontFamily="@font/open_sans_bold"
+            android:textColor="@color/white"
+            android:text="@string/adjust_background_sound"
+            android:gravity="center"/>
+        <LinearLayout
+            android:layout_marginTop="@dimen/dp5"
+            android:layout_marginBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:padding="@dimen/dp5"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="@string/recorded_sound"
+                android:textSize="15sp"
+                android:fontFamily="@font/open_sans_semi_bold"
+                android:textColor="@color/white"/>
+            <TextView
+                android:gravity="end"
+                android:padding="@dimen/dp5"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="@string/music"
+                android:textSize="15sp"
+                android:fontFamily="@font/open_sans_semi_bold"
+                android:textColor="@color/white"/>
+        </LinearLayout>
+        <androidx.appcompat.widget.AppCompatSeekBar
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:progress="50"
+            android:progressDrawable="@drawable/progress_bar_style"
+            android:thumb="@drawable/custom_thumb"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"/>
+
+    </LinearLayout>
+
+    <include layout="@layout/filter_layout" />
 </RelativeLayout>

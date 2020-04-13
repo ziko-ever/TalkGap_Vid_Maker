@@ -7,29 +7,36 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="8dp"
     app:cardElevation="5dp">
-    <RelativeLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <ImageView
-            android:id="@+id/image_item"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_autorenew"
-            android:orientation="vertical" android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-        <ImageView
+        <RelativeLayout
+            android:id="@+id/image_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#30242424"/>
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/image_item"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_autorenew"
+                android:orientation="vertical" android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#30242424"/>
+        </RelativeLayout>
         <ImageView
+            app:layout_anchor="@id/image_layout"
+            app:layout_anchorGravity="right"
             android:id="@+id/image_cancel"
-            android:padding="4dp"
             android:layout_alignParentEnd="true"
             android:clickable="true"
             android:focusable="true"
-            android:background="?android:attr/selectableItemBackground"
+            android:background="@drawable/orange_circle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_cancel_"/>
-    </RelativeLayout>
+            android:src="@drawable/ic_close_sm"/>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
 
 </com.google.android.material.card.MaterialCardView>

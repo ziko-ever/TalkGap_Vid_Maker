@@ -22,7 +22,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name="com.xheghun.vidit.EffectsActivity"></activity>
+        <activity android:name="com.xheghun.vidit.TrimActivity"></activity>
+        <activity android:name="com.xheghun.vidit.CoverImageSelectActivity" />
+        <activity android:name="com.xheghun.vidit.VideoEffectsActivity" />
         <activity
             android:name="com.xheghun.vidit.SelfieVideoEditActivity"
             android:screenOrientation="portrait" />

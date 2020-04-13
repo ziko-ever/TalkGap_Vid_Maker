@@ -43,16 +43,51 @@
     <string name="foursnaps">4-Snap</string>
 
     <string name="videos_tab">Videos</string>
-    <string name="images_tab">Images</string>
+    <string name="images_tab">Photos</string>
 
     <string name="app_name_custom">- Talk Gap -</string>
     <string name="theme">Theme</string>
-    <string name="music">Music</string>
     <string name="undo">undo</string>
     <string name="redo">redo</string>
     <string name="quick_effects">quick effects</string>
     <string name="sound">sound</string>
     <string name="volume">volume</string>
     <string name="cover">cover</string>
+    <string name="cancel">Cancel</string>
+    <string name="save">Save</string>
+    <string name="adjust_background_sound">Adjust Background Sound</string>
+    <string name="music">Music</string>
+    <string name="recorded_sound">Recorded Sound</string>
+    <string name="ok">Ok</string>
+    <string name="change_video_cover">Change Video Cover</string>
+    <string name="_20_words">20 words</string>
+    <string name="what_s_your_video_title">What\'s your video title</string>
+    <string name="allow_next_door">Allow Next Door</string>
+    <string name="users_around_you">users around your neighbourhood can watch this video</string>
+    <string name="_150_words">150 words</string>
+    <string name="short_story">Write a short story about your video</string>
+    <string name="post">Post</string>
+    <string name="protect_your_video">Protect your video</string>
+    <string name="subscribe_with_kozcoin">Subscribe with KozCoin</string>
+    <string name="hansolo_handle">\@hansolo</string>
+    <string name="han_solo">Han Solo</string>
+    <string name="pay">Pay</string>
+    <string name="get_coins">Get Coins</string>
+    <string name="add">Add</string>
+    <string name="clip">clip</string>
+    <string name="select_at_least">select at least</string>
+    <string name="broadcast_your_video">Broadcast Your Video</string>
+    <string name="no">No</string>
+    <string name="hold_to_apply_effects">Hold to apply effects</string>
+    <string name="background_sound">Background Sound</string>
+    <string name="add_text">Add Text</string>
+    <string name="sticker">sticker</string>
+    <string name="add_music_sm">add music</string>
+    <string name="collections">collections</string>
+    <string name="cnvas">Canvas</string>
+    <string name="clip_edit">Clip Edit</string>
+    <string name="add_sound">Add Sound</string>
+    <string name="snap">Snap</string>
+    <string name="hold">hold</string>
 
 </resources>
