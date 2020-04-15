@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_alignParentBottom="true"
+    android:id="@+id/selected_photos_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#40000000"
+    tools:showIn="@layout/fragment_gallery_image">
+
+    <TextView
+        android:textSize="14sp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:id="@+id/min_max"
+        android:text="@string/min_max"
+        android:textColor="@android:color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@id/selected_next_btn" />
+
+    <TextView
+        android:layout_below="@+id/min_max"
+        android:id="@+id/current_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="@string/pic_message"
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@id/selected_next_btn"
+        android:fontFamily="@font/open_sans_semi_bold"
+        android:textColor="@android:color/white" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/selected_next_btn"
+        android:layout_width="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        app:cornerRadius="@dimen/dp20"
+        android:text="@string/next"
+        android:textColor="@android:color/white"
+        app:backgroundTint="@color/colorPrimary" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/selected_photos_rc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/current_text"
+        android:layout_margin="4dp" />
+</RelativeLayout>

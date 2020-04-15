@@ -1,0 +1,23 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#242424"
+    android:padding="8dp"
+    tools:context="com.xheghun.vidit.fragments.QuickEffectsFragment">
+    <TextView
+        android:layout_marginStart="10dp"
+        android:layout_width="match_parent"
+        android:text="@string/hold_to_apply_effects"
+        android:fontFamily="@font/open_sans_semi_bold"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:layout_height="wrap_content" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/quick_effects_rc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#757575"
+    tools:context="com.xheghun.vidit.VideoEffectsActivity">
+    <LinearLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/cancel_btn"
+            android:layout_margin="2dp"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:text="@string/cancel"/>
+        <!--prevent button from overlapping -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/save_btn"
+            android:layout_margin="2dp"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textAllCaps="false"
+            android:text="@string/save"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar"
+        android:orientation="vertical"
+        android:layout_above="@+id/viewPager">
+
+
+            <RelativeLayout
+                android:id="@+id/image_frame_layout"
+                android:layout_width="@dimen/dp200"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:layout_height="0dp">
+                <ImageView
+                    android:id="@+id/image_frame"
+                    android:layout_margin="12dp"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/afro_woman" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:text="00.00"
+                    android:layout_margin="20dp"
+                    android:layout_alignParentEnd="true"/>
+
+                <ImageButton
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_play_outline_large"
+                    android:layout_centerInParent="true"/>
+            </RelativeLayout>
+
+        <LinearLayout
+            android:layout_below="@id/image_frame_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:src="@drawable/afro_woman"
+                android:layout_width="60dp"
+                android:scaleType="centerCrop"
+                android:layout_height="60dp"/>
+            <ImageView
+                android:src="@drawable/afro_woman"
+                android:layout_width="60dp"
+                android:scaleType="centerCrop"
+                android:layout_height="60dp"/>
+            <ImageView
+                android:src="@drawable/afro_woman"
+                android:layout_width="60dp"
+                android:scaleType="centerCrop"
+                android:layout_height="60dp"/>
+            <ImageView
+                android:src="@drawable/afro_woman"
+                android:layout_width="60dp"
+                android:scaleType="centerCrop"
+                android:layout_height="60dp"/>
+            <ImageView
+                android:src="@drawable/afro_woman"
+                android:layout_width="60dp"
+                android:scaleType="centerCrop"
+                android:layout_height="60dp"/>
+            <ImageView
+                android:src="@drawable/afro_woman"
+                android:layout_width="60dp"
+                android:scaleType="centerCrop"
+                android:layout_height="60dp"/>
+            <ImageView
+                android:src="@drawable/afro_woman"
+                android:layout_width="60dp"
+                android:scaleType="centerCrop"
+                android:layout_height="60dp"/>
+            <ImageView
+                android:src="@drawable/afro_woman"
+                android:layout_width="60dp"
+                android:scaleType="centerCrop"
+                android:layout_height="60dp"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+
+
+
+
+  <!--=  <include layout="@layout/quick_effects_layout" />
+    <include layout="@layout/timer_effects_layout"/>
+
+    <LinearLayout
+        android:id="@+id/tab"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:orientation="horizontal">
+        <com.google.android.material.button.MaterialButton
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:textColor="@color/white"
+            android:id="@+id/show_quick_btn"
+            android:textAllCaps="false"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_margin="4dp"
+            android:text="Quick Effects"
+            android:layout_height="wrap_content"/>
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:textColor="@color/white"
+            android:id="@+id/show_timer_btn"
+            android:textAllCaps="false"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_margin="4dp"
+            android:text="Time Effects"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>-->
+    <com.xheghun.vidit.XheghunViewPager
+        android:visibility="visible"
+        android:layout_marginTop="15dp"
+        android:id="@+id/viewPager"
+        android:layout_above="@id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <com.google.android.material.tabs.TabLayout
+        android:background="#242424"
+        android:id="@+id/tabLayout"
+        app:tabSelectedTextColor="@color/white"
+        app:tabIndicatorColor="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"/>
+</RelativeLayout>

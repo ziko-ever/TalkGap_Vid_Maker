@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/theme"
+        android:title="@string/rotate"
+        android:icon="@drawable/ic_rotate_right"/>
+    <item android:title="@string/crop"
+        android:id="@+id/crop_vid"
+        android:icon="@drawable/ic_crop"/>
+</menu>

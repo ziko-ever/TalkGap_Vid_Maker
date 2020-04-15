@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    app:cardCornerRadius="8dp"
+    android:id="@+id/dialog_root"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:padding="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:fontFamily="@font/open_sans_bold"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:gravity="center_horizontal"
+                android:text="@string/subscribe_with_kozcoin"
+                android:layout_height="wrap_content"/>
+            <ImageView
+                android:padding="@dimen/dp5"
+                android:id="@+id/close_btn"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_cancel_black"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#424242"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/avatar"
+                android:layout_marginEnd="10dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/afro_woman"
+                android:layout_gravity="center_horizontal"/>
+            <TextView
+                android:layout_marginTop="10dp"
+                android:id="@+id/name"
+                android:layout_toEndOf="@id/avatar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="15sp"
+            android:textColor="@color/black"
+            android:text="@string/han_solo"/>
+            <TextView
+                android:layout_marginTop="6dp"
+                android:layout_below="@id/name"
+                android:layout_toEndOf="@id/avatar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                android:text="@string/hansolo_handle"/>
+            <TextView
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="10dp"
+                android:id="@+id/balance"
+                android:layout_toEndOf="@id/name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                android:text="KozCoin \n 500"/>
+        </RelativeLayout>
+
+        <RadioGroup
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <RadioButton
+                android:theme="@style/radioButtonStyle"
+                android:padding="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Daily \t \t \t 0.5koz"/>
+
+            <RadioButton
+                android:theme="@style/radioButtonStyle"
+                android:padding="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="3 Days \t \t \t 1.0koz"/>
+
+            <RadioButton
+                android:theme="@style/radioButtonStyle"
+                android:padding="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="5 Days \t \t \t 1.50koz"/>
+            <RadioButton
+                android:theme="@style/radioButtonStyle"
+                android:padding="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="1 week \t \t \t 2.50koz"/>
+
+            <RadioButton
+                android:theme="@style/radioButtonStyle"
+                android:padding="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="2 weeks \t \t \t 4.00koz"/>
+            <RadioButton
+                android:theme="@style/radioButtonStyle"
+                android:padding="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Month \t \t \t 5.00koz"/>
+        </RadioGroup>
+
+        <LinearLayout
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#424242"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#757575"
+                android:text="@string/get_coins"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/pay_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorPrimary"
+                android:text="@string/pay"/>
+
+        </LinearLayout>
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>
