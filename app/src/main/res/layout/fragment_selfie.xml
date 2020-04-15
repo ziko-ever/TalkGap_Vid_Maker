@@ -11,14 +11,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-    <LinearLayout
+    <!--<LinearLayout
         android:orientation="vertical"
         android:id="@+id/status_margin"
         android:layout_width="match_parent"
-        android:layout_height="28dp"/>
+        android:layout_height="28dp"/>-->
 
     <ProgressBar
-        android:layout_below="@id/status_margin"
         android:id="@+id/video_progress_bar"
         android:layout_marginStart="4dp"
         android:layout_marginEnd="4dp"

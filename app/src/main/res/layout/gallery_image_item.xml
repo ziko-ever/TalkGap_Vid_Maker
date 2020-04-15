@@ -19,9 +19,9 @@
             android:id="@+id/item_selected"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#90000000"
+            android:background="#73042f66"
             android:gravity="center"
-            android:textSize="28sp"
+            android:textSize="35sp"
             android:textColor="@color/white"
             android:fontFamily="@font/open_sans_bold"/>
     </RelativeLayout>

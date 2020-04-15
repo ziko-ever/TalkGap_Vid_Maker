@@ -7,15 +7,15 @@
     android:orientation="vertical"
     android:background="@color/black"
     tools:context="com.xheghun.vidit.fragments.GalleryFragment">
-    <LinearLayout
+    <!--<LinearLayout
         android:orientation="vertical"
         android:id="@+id/status_margin"
         android:layout_width="match_parent"
         android:layout_marginBottom="10dp"
-        android:layout_height="28dp"/>
+        android:layout_height="28dp"/>-->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="?attr/actionBarSize"
         android:orientation="horizontal">
         <ImageButton
             android:padding="@dimen/dp5"

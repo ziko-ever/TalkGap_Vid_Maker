@@ -12,8 +12,8 @@
         <item name="android:textColorSecondary">@color/white</item>
         <item name="android:actionMenuTextColor">@color/white</item>
         <item name="android:radioButtonStyle">@style/radioButtonStyle</item>
-        <item name="android:windowTranslucentStatus">true</item>
-       <item name="android:windowTranslucentNavigation">true</item>
+      <!--  <item name="android:windowTranslucentStatus">true</item>
+       <item name="android:windowTranslucentNavigation">true</item>-->
     </style>
 
     <style name="radioButtonStyle" parent="Widget.AppCompat.CompoundButton.RadioButton">
@@ -116,6 +116,7 @@
     <style name="tabTextAppearance2" parent="TextAppearance.MaterialComponents.Subtitle2">
         <item name="android:textAllCaps">false</item>
         <item name="android:fontFamily">@font/open_sans_bold</item>
+        <item name="textSize">13sp</item>
     </style>
 
 </resources>

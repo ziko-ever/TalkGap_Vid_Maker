@@ -13,8 +13,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import androidx.annotation.NonNull;
+import android.view.WindowManager;;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -137,7 +136,7 @@ public class MainActivity extends FragmentActivity {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         if (requestCode == PERMISSION_REQUEST_CODE) {
             if (grantResults.length != 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 loadFragments();

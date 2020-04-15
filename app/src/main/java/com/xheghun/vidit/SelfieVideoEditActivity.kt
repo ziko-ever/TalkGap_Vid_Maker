@@ -80,9 +80,9 @@ class SelfieVideoEditActivity : AppCompatActivity() {
 
     private fun initFilters() {
         val adapter = TabAdapter(supportFragmentManager,0)
-        adapter.addFragment(CameraFilterFragment("PRT "),"Portrait")
-        adapter.addFragment(CameraFilterFragment("LND "),"Landscape")
-        adapter.addFragment(CameraFilterFragment("STL "),"Style-Leo")
+        adapter.addFragment(CameraFilterFragment(" TG- "),"Smart")
+        adapter.addFragment(CameraFilterFragment("E- "),"Style-Leo")
+        adapter.addFragment(CameraFilterFragment("K- "),"Creative")
         adapter.notifyDataSetChanged()
 
         filterViewPager.offscreenPageLimit = 3

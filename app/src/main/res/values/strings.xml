@@ -18,7 +18,7 @@
 
     <string name="trim_video">Trim Video</string>
     <string name="Cut">cut</string>
-    <string name="min_max">Select min of 4 and max of 16</string>
+    <string name="min_max">Select min of 4 and max of 15</string>
     <string name="current_photo">Current Photo(s) </string>
     <string name="update">Update</string>
     <string name="update_msg">The version of TalkGap you\'re using is outdated,
@@ -35,12 +35,11 @@
     <string name="rotate">Rotate</string>
     <string name="done">Done</string>
     <string name="pic_message">Photo(s) Selected 0</string>
-    <string name="four_snaps">Four Snaps</string>
+    <string name="four_snaps">4-Snaps</string>
 
     <string name="video">Video</string>
     <string name="gallery">Gallery</string>
     <string name="selfie">Selfie</string>
-    <string name="foursnaps">4-Snap</string>
 
     <string name="videos_tab">Videos</string>
     <string name="images_tab">Photos</string>
@@ -63,7 +62,7 @@
     <string name="_20_words">20 words</string>
     <string name="what_s_your_video_title">What\'s your video title</string>
     <string name="allow_next_door">Allow Next Door</string>
-    <string name="users_around_you">users around your neighbourhood can watch this video</string>
+    <string name="users_around_you">Users around your neighbourhood can watch this video</string>
     <string name="_150_words">150 words</string>
     <string name="short_story">Write a short story about your video</string>
     <string name="post">Post</string>

@@ -322,9 +322,9 @@ public class VideoEditActivity extends AppCompatActivity {
 
     private void initFilters() {
         TabAdapter adapter = new TabAdapter(getSupportFragmentManager(), 0);
-        adapter.addFragment(new CameraFilterFragment("PRT "), "Portrait");
-        adapter.addFragment(new CameraFilterFragment("LND "), "Landscape");
-        adapter.addFragment(new CameraFilterFragment("STL "), "Style-Leo");
+        adapter.addFragment(new CameraFilterFragment("TG-"), "Smart");
+        adapter.addFragment(new CameraFilterFragment("E-"), "Style-Leo");
+        adapter.addFragment(new CameraFilterFragment("K-"), " Creative");
         adapter.notifyDataSetChanged();
         filterViewPager.setAdapter(adapter);
 
